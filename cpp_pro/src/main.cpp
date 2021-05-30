@@ -17,7 +17,7 @@ int main() {
 	cout << "\t\t\t" << strs[2] << endl;
 	cout << "\t\t\t\t" << strs[3] << endl;
 	*/
-	
+
 	//2
 
 	/*char const* str = "I love C++!";
@@ -34,6 +34,7 @@ int main() {
 	//cout << "\'\\t\', " << "\'\\n\', " << "\'\\\\', " << "\'\\'\', " << "\'\\\"\'." << endl;
 
 	//4
+
 	/*char const* strs[] = {
 		"#include <iostream>",
 		"int main() {",
@@ -49,6 +50,7 @@ int main() {
 	}*/
 
 	//5
+
 	/*char const* strs[] = {
 		"Май 2021",
 		"Пн\tВт\tСр\tЧт\tПт\tСб\tВс",
@@ -63,5 +65,6 @@ int main() {
 	for (size_t i = 0; i < STRINGS; ++i) {
 		cout << strs[i] << endl;
 	}*/
+
 	return 0;
 }

@@ -1,204 +1,125 @@
 #include <iostream>
+#include <cmath>
 
 int main() {
 	using namespace std;
 	setlocale(LC_ALL, "Russian");
+
 	//1
+    // average
 
-//	char const* strs[] = {
-//		"\"To be",
-//		"or not",
-//		"to be...\"",
-//		"/ Shakespeare /"
-//	};
-//
-//	cout << "\t" << strs[0] << endl;
-//	cout << "\t\t" << strs[1] << endl;
-//	cout << "\t\t\t" << strs[2] << endl;
-//	cout << "\t\t\t\t" << strs[3] << endl;
+//	double first {}, second{}, third{};
+//	cout << "first: ";
+//	cin >> first;
+//	cout << "second: ";
+//	cin >> second;
+//	cout << "third: ";
+//	cin >> third;
+//    cout << "average is: " << (first + second + third) / 3.0 << endl;
 
+    //2
+    //roots of equation
 
-	//2
+//    double a{}, b{}, x{};
+//    cout << "a: ";
+//    cin >> a;
+//    cout << "b: ";
+//    cin >> b;
+//    x = -b/a;
+//    cout << "x = " << x << endl;
 
-//	char const* str = "I love C++!";
-//	size_t const STRINGS = 5;
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		for (size_t j = 0; j <= i; ++j) {
-//			cout << "\t";
-//		}
-//		cout << str << endl;
-//	}
+    //3
+    // power of num
 
-	//3
+//    double num = 0.0, power = 0.0;
+//    cout << "num: ";
+//    cin >> num;
+//    cout << "power: ";
+//    cin >> power;
+//    cout << num << " in " << power << " = " << pow(num, power) << endl;
 
-   //cout << "\'\\t\', " << "\'\\n\', " << "\'\\\\', " << "\'\\'\', " << "\'\\\"\'." << endl;
+    //4
+    // Circle forms
 
-	//4
+//    double const PI = 3.14159265359;
+//    double r {0.0};
+//    double L {0.0};
+//    double S {0.0};
+//    cout << "r: " ;
+//    cin >> r;
+//    L = 2.0 * PI * r;
+//    S = PI * r * r;
+//    cout << "L = " << L << endl;
+//    cout << "S = " << S << endl;
 
-//	char const* strs[] = {
-//		"#include <iostream>",
-//		"int main() {",
-//		"\tusing namespace std;",
-//		"\tsetlocale(LC_ALL, \"Russian\");",
-//		"\tcout << \"\'\\t\', \" << \"\'\\n\', \" << \"\'\\\\', \" << \"\'\\'\', \" << \"\'\\\"\'.\" << endl;",
-//		"\treturn 0;",
-//		"}"
-//	};
-//	size_t STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << strs[i] << endl;
-//	}
+    //5
+    //currency converter
 
-	//5
+//    double const DOLLAR_HRYVNA = 27.0924;
+//    double const EURO_HRYVNA = 33.0100;
+//    double const BYTCOIN_HRYVNA = 895321.67;
+//    cout << "Hryvnas: ";
+//    double hryvnas = 0.0;
+//    cin >> hryvnas;
+//    cout << "dollars: " << hryvnas / DOLLAR_HRYVNA << "\t";
+//    cout << "euro: " << hryvnas / EURO_HRYVNA << "\t";
+//    cout << "bitcoin: " << hryvnas / BYTCOIN_HRYVNA << "\n";
 
-//	char const* strs[] = {
-//		"Май 2021",
-//		"Пн\tВт\tСр\tЧт\tПт\tСб\tВс",
-//		"26\t27\t28\t29\t30\t1\t2",
-//		"3\t4\t5\t6\t7\t8\t9",
-//		"10\t11\t12\t13\t14\t15\t16",
-//		"17\t18\t19\t20\t21\t22\t23",
-//		"24\t25\t26\t27\t28\t29\t30",
-//		"31\t1\t2\t3\t4\t5\t6"
-//	};
-//	size_t STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << strs[i] << endl;
-//	}
+    //6
+    //converner km, miles
 
-	//6
+//    cout << "km: ";
+//    double km = 0.0;
+//    cin >> km;
+//    double const MILLES_KM = 1.0 / 1.60934;
+//    double const SEA_MILLES_KM = 1.0 / 1.852;
+//    cout << "miles: " << MILLES_KM * km << "\t";
+//    cout << "sea_miles: " << SEA_MILLES_KM * km << "\n";
 
-//	char const* strs[] = {
-//		"                  *  **",
-//		"                *    ***",
-//		"              *        *",
-//		"            **************",
-//		"            * ****  **** *",
-//		" *   *   *  * *  *  *  * *  *   *   *",
-//		"* * * * * * * ****  *  * * * * * * * *",
-//		"* * * * * * *       **** * * * * * * *",
-//		"* * * * * * ************** * * * * * *",
-//
-//	};
-//	size_t STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << strs[i] << endl;
-//	}
+    //7
+    //percents
 
-	//7
-
-//	char const* strs[] = {
-//		"                     Grishchuk Dmitry Ivanovich",
-//		"                                  *",
-//		"                                  *",
-//		"                                  *",
-//		"                                 * *",
-//		"                                *   *",
-//		"       Grishchuk Ivan Dmitrievich   Grishchuk Lubov Vasilievna",
-//		"                      *                            *",
-//		"                      *                            *",
-//		"                      *                            *",
-//		"                     * *                          * *",
-//		"                    *   *                        *   *",
-//		"             Ded Dima   Babushka Milia   Ded Vasia   Babushka Masha"
-//	};
-//	size_t const STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << strs[i] << endl;
-//	}
-
+//    cout << "N: ";
+//    double N = 0;
+//    cin >> N;
+//    double PERCENT = 0.01;
+//    cout << "P: ";
+//    double P = 0;
+//    cin >> P;
+//    cout << N * P * PERCENT << endl;
 
     //8
+    //degrees converter
 
-//    char const* strs[] = {
-//		"          *****          **       **  **            **           *",
-//		"         *******         ***      **  ***          ***          ***",
-//		"        **     **        ****     **  ****        ****         ** **",
-//		"       **       **       ** **    **  ** **      ** **        **   **",
-//		"      **         **      **  **   **  **  **    **  **       **     **",
-//		"     **           **     **   **  **  **   **  **   **      **       **",
-//		"  *********************  **    ** **  **    ****    **     *************",
-//		"  *********************  **     ****  **     **     **    ***************",
-//		"   **               **   **      ***  **            **   **             **",
-//		"    *               *    **       **  **            **  **               **"
-//	};
-//	size_t const STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << strs[i] << endl;
-//	}
+//    double KC = 273.15;
+//    double REAMUR_CELCIUM = 1.25;
+//    cout << "C: ";
+//    double C = 0;
+//    cin >> C;
+//    cout << "F: " << (C * 9.0/5.0) + 32.0 << "\t";
+//    cout << "K: " << C + KC << "\t";
+//    cout << "R: " << 1.0 / REAMUR_CELCIUM * C << "\t";
+//    cout << "D: " << (100.0 - C) * 3.0 / 2.0 << "\n";
+//    cout << "F: ";
+//    double F = 0;
+//    cin >> F;
+//    cout << "C: " << (F - 32.0) * 5.0/9.0 << " C" << endl;
 
-
-	//9
-
-//	char const* strs[] = {
-//		"     *    *",
-//		"             *         *",
-//		"*",
-//		"",
-//		"               *      *"
-//	};
-//	size_t const STRINGS = sizeof strs / sizeof strs[0];
-//	for (size_t i = 0; i < STRINGS; ++i) {
-//		cout << "\t" << strs[i] << endl;
-//	}
-
-    //10
-
-	char const* strs[] = {
-        "\tИванов Иван Иванович",
-        "\tЛичные данные:      Возраст: 22 года",
-        "\tСемейное положение: холост",
-        "",
-        "",
-        "",
-        "Контактная информация:	Адрес: г. Хабаровск, ул. Стрельникова",
-        "Телефон: 8-000-000-00-00",
-        "E-mail: IVANKO_8000000@ yandex. ru",
-        "",
-        "",
-        "",
-        "Цель:",
-        "Устроиться на интересную работу с достойной оплатой и перспективой",
-        "карьерного роста в сфере экономики, финансов, банковской сфере или логистики.",
-        "",
-        "",
-        "Специальность: «Математические методы и модели исследования операций вэкономике»",
-        "",
-        "",
-        "Средний балл зачетной книжки: 4,0",
-        "2000-2003 - Лицей информационных технологий.",
-        "",
-        "",
-        "Опыт работы и полученные про фессиональные навыки (практика):",
-        "2007; 2008 гг. «Аэронавигация Дальнего Востока»",
-        "Стажер (производственная практика):",
-        "- использовал анализ уровней и закономерностей развития экономических систем и ",
-        "отдельных процессов, их объективная оценка, планирование",
-        "и прогнозирование развитие",
-        "отраслей и предприятий с применением математических методов,",
-        "информационных технологий;",
-        "- провел комплексный анализ хозяйственной деятельности предприятия современными",
-        "средствами анализа и прогнозирования финансово-экономических ситуаций.",
-        "",
-        "",
-        "Дополнительные навыки и интересы	 Английский язык – средний уровень",
-        "(перевожу технические тесты и свободно говорю);",
-        "Опытный пользователь ПК. Работаю в программах: КОМПАС; AutoCad; ANSYS и др.",
-        "Имею водительские права категории В.",
-        "",
-        "",
-        "Личные достижения:	 Победитель олимпиады «1С-Карьера» г. Красноярск 2009.",
-        "Занял 2 место в олимпиаде по математике ТОГУ, 2005г.",
-        "Имею 1 разряд по шахматам.",
-        "",
-        "",
-        "Личные качества:",
-        "Ответственный, легко обучаемый, имею организаторские способности.",
-        "Веду здоровый образ жизни."
-	};
-	size_t const STRINGS = sizeof strs / sizeof strs[0];
-	for (size_t i = 0; i < STRINGS; ++i) {
-		cout << strs[i] << endl;
-	}
+    //9
+    //swap a and b;
+    int a = 0, b = 0;
+    cout << "a: ";
+    cin >> a;
+    cout << "b: ";
+    cin >> b;
+    cout << "a = " << a << "\tb = " << b << endl;
+    int tmp = a;
+    a = b;
+    b = tmp;
+    cout << "a = " << a << "\tb = " << b << endl;
+    a += b;
+    b = a - b;
+    a -= b;
+    cout << "a = " << a << "\tb = " << b << endl;
 	return 0;
 }

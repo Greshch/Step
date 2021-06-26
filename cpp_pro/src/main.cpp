@@ -1,967 +1,450 @@
 #include <iostream>
-#include <cmath>
-#include <string>
-#include <algorithm>
 #include <time.h>
-
 using namespace std;
-
-struct Point {
-    int x;
-    int y;
+///////////////////////////////////////////
+struct Threebits {
+    size_t f;
+    size_t s;
+    size_t t;
 };
 
-enum DAYS {
-    SUNDAY,
-    MONDAY,
-    THUESDAY,
-    WENSDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY
+int const SIMPLE_PAY = 250;
+
+bool isWin(Threebits const& threebits);
+
+bool isDefeat(int credits);
+
+void displayBandit(Threebits const& threebits);
+
+void evaluate(Threebits threebits, int &pInt);
+
+void currentPay(int &credits);
+
+void displayCredit(int const &credits);
+
+////////////////////////////////////////////////
+
+void printDigits(size_t n, size_t exp);
+
+////////////////////////////////////////////////
+
+struct Monster {
+    int hp;
+    int damage;
 };
 
-struct Data {
-    int year;
-    int month;
-    int day;
+struct Pickman : public Monster {
+
 };
 
-enum MONTHES {
-    JAN = 1,
-    FEB,
-    MAR,
-    APR,
-    MAY,
-    JUN,
-    JUL,
-    AUG,
-    SEP,
-    OCT,
-    NOV,
-    DEC
+struct Dragon : public Monster {
+
 };
 
-int const MON = 12;
-
-int days[MON] {
-    31,28, // winter
-    31,30,31, // spring
-    30,31,31, // summer
-    30,31,30, // autumn
-    31 // winter
-};
-
-bool isLeapYear(int year) {
-    if (year % 4 == 0) {
-        if (year % 100) {
-            return true;
-        } else if (year % 400 == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    } 
-    else {
-        return false;
-    }
-}
-
-enum ANIMALS {
-    CAT = 1,
-    DOG,
-    COW,
-    SHEEP,
-    DONKEY,
-    HORSE,
-    PIG,
-    RUSTER,
-    TURKEY,
-    CROW
-};
-
-struct AnswerStruct {
-    string answer;
-    int right; 
-};
-
-AnswerStruct answers[] = {
-    {
-        R"(Определить государство по его краткому описанию. 
-        Эта страна относится к числу экономически высокоразвитых.
-        Ее территория полностью расположена в Западном полушарии 
-        и омывается водами трех океанов.
-        Страна является первой по размерам территории и третьей по
-        численности населения на материке, на котором она расположена.
-        
-        1 Бразилия
-        2 Арентина
-        3 Канада
-        4 США
-        )",
-        3,
-    },
-
-    {
-        R"(Территория этой африканской страны расположена в пределах 
-        экваториальногои субэкваториального климатических поясов. 
-        Главными природными богатствами являются запасы нефти, 
-        природного газа, оловянных руд. 
-        По численности населения страна входит в десятку крупнейших стран мира. 
-        Страна активно участвует в международном 
-        географическом разделении труда, является членом ОПЕК.
-
-        1 Судан
-        2 Египет
-        3 Нигерия
-        4 Ангола
-        )" , 
-        3
-    },
-
-    {
-        R"(Эта страна относится к числу экономически высокоразвитых.
-        Ее территория расположена в Восточном полушарии и омывается 
-        водами Тихого и Индийского океанов. 
-        Значительную часть территории занимают пустыни и полупустыни. 
-        Особенность животного мира – сумчатые млекопитающие, 
-        а также млекопитающие, откладывающие яйца.
-
-        1 Япония
-        2 Австралия
-        3 Китай
-        4 Саудовская Аравия
-        )" , 
-        2
-    },
-
-    {
-        R"(Эта страна — одна из самых крупных, быстроразвивающихся стран
-        материка, длительное время была колонией Франции.
-        Более 90% ее населения проживает в прибрежной полосе 
-        и горных долинах. Главное богатство страны — месторождения 
-        нефти и природного газа. Основная отрасль промышленности — 
-        горнодобывающая, 99% экспорта страны составляют нефть 
-        и нефтепродукты.
-
-        1 Алжир
-        2 Египет
-        3 Ливия
-        4 Судан
-        )" , 
-        1
-    },
-    
-    {
-        R"(Эта высокоразвитая страна по форме правления является конституционной 
-        монархией. По числу жителей входит в первую десятку стран мира. 
-        Однонациональное по составу население характеризуется высокой 
-        средней плотностью, самой высокой продолжительностью жизни в мире. 
-        В промышленности приоритетное развитие получили новейшие наукоемкие
-        отрасли.
-
-        1 Япония
-        2 США
-        3 Китай
-        4 Бразилия
-        )" , 
-        1
-    },
-
-    {
-        R"( Эта страна — вторая по площади территории на материке,
-        расположена в трех климатических поясах. Длительное время
-        (в течение трех веков) она оставалась испанской колонией. 
-        В этой стране находится самая высокая 
-        точка на материке (6959 м). На юге сформировались сухие 
-        степи – Патагония. Крупнейшим городом является столица.
-
-        1 Венесуэла
-        2 Бразилия
-        3 Аргентина
-        4 Мексика
-        )" , 
-        3
-    }
-    
-};
-
-int const T_TOO_HOT = 35;
-int const T_HOT = 27;
-int const T_WARMY = 21;
-int const T_COOL = 15;
-int const T_COLDLY = 8;
-int const T_COLD = 0;
-int const T_FROZENLY = -5;
-int const T_FROZEN = -12;
-int const T_VERY_FROZEN = -20;
-int const T_DEEP_FROZEN = -27;
-
-enum ZODIACS {
-    KOZEROG,
-    STRELEC,
-    VODOLEY,
-    RYBY,
-    OVEN,
-    TELEC,
-    BLYZNICY,
-    RAK,
-    LEV,
-    DEVA,
-    VESY,
-    SCORPION
-};
+bool isAlive(Monster const &dragon);
 
 int main() {
-	setlocale(LC_ALL, "Russian");
-    srand(time(0));
-
-	//1
-    //Paralelna li pryamaya OX or OY
-
-    // Point A, B;
-    // cout << "A(x,y): ";
-    // cin >> A.x >> A.y;
-
-    // cout << "B(x,y): ";
-    // cin >> B.x >> B.y;
-
-    // int dx = B.x - A.x;
-    // int dy = B.y - A.y;
-
-    // if (0 == dx) {
-    //     cout << "AB || OY" << endl;
-    // }
-
-    // if (0 == dy) {
-    //     cout << "AB || OX" << endl;
-    // }
-
-    //////////////////////////////////////////////////////
+    setlocale(LC_ALL, "Russian");
+    srand(time(NULL));
+    //1
+    // star's line output
+    /*cout << "stars in line: " ;
+    size_t stars = 0;
+    cin >> stars;
+    for (size_t i = 0; i < stars; ++i) {
+        cout << "*";
+    }   cout << endl;*/
 
     //2
-    //Does the num have a iracional part
-
-    // double d_num = 0.0;
-    // cout << "num: ";
-    // cin >> d_num;
-    
-    // bool realExist = (d_num - (int)d_num > 0) ? true : false;
-    // if (realExist) {
-    //     cout << "Num has a fractional part\n";
-    // } 
-
-    //////////////////////////////////////////////////////
+    // event nums output from 1 to 100
+    /*int const FROM = 2;
+    int const TO = 100;
+    for (int i = FROM; i <= TO; i += 2) {
+        cout << i << " " ;
+        if (0 == i % 50) { cout << endl; }
+    } cout << endl;*/
 
     //3
-    //Day of week
-    //3.1 version "if"
-    // int day;
-    // cout << "Input num of day: ";
-    // cin >> day;
-
-    // if (day == DAYS::SUNDAY) {
-    //     cout << "It's a " << "sunday" << endl;
-    // }
-    // else if (day == DAYS::MONDAY) {
-    //     cout << "It's a " << "monday" << endl;
-    // }
-    // else if (day == DAYS::THUESDAY) {
-    //     cout << "It's a " << "thuesday" << endl;
-    // }
-    // else if (day == DAYS::WENSDAY) {
-    //     cout << "It's a " << "wensday" << endl;
-    // }
-    // else if (day == DAYS::THURSDAY) {
-    //     cout << "It's a " << "thursday" << endl;
-    // }
-    // else if (day == DAYS::FRIDAY) {
-    //     cout << "It's a " << "friday" << endl;
-    // } 
-    // else if (day == DAYS::SATURDAY) {
-    //     cout << "It's a " << "saturday" << endl;
-    // } 
-    // else {
-    //     cout << "Unknown day..." << endl;
-    // }
-
-    //3.1 switch version
-    // int day;
-    // cout << "Input num of day: ";
-    // cin >> day;
-
-    // switch (day) {
-    //     case DAYS::SUNDAY:
-    //     cout << "It's a " << "sunday" << endl;
-    //     break;
-
-    //     case DAYS::MONDAY:
-    //     cout << "It's a " << "monday" << endl;
-    //     break;
-
-    //     case DAYS::THUESDAY:
-    //     cout << "It's a " << "thuesday" << endl;
-    //     break;
-
-    //     case DAYS::WENSDAY:
-    //     cout << "It's a " << "wensday" << endl;
-    //     break;
-
-    //     case DAYS::THURSDAY:
-    //     cout << "It's a " << "thursday" << endl;
-    //     break;
-
-    //     case DAYS::FRIDAY:
-    //     cout << "It's a " << "friday" << endl;
-    //     break;
-
-    //     case DAYS::SATURDAY:
-    //     cout << "It's a " << "saturday" << endl;
-    //     break;
-    // }
-
-    /////////////////////////////////////////////////////////////////////
+    // sum from M to N;
+    /*int M, N, sum = 0;
+    cout << "N,M: ";
+    cin >> N >> M;
+    for (int i = N; i <= M; ++i) {
+        sum += i;
+    }
+    cout << "sum: " << sum << endl;*/
 
     //4
-    //Correct hour:minutes:seconds
-
-    // int hours, minutes, seconds;
-    // cout << "Input hours(0-23): ";
-    // cin >> hours;
-
-    // cout << "Input minutes(0-59): ";
-    // cin >> minutes;
-
-    // cout << "Input seconds(0-59): ";
-    // cin >> seconds;
-
-    // if (hours < 0 || hours > 23) {
-    //     cout << "Incorrect hours...\n";
-    // }
-    // if (minutes < 0 || hours > 59) {
-    //     cout << "Incorrect minutes...\n";
-    // }
-    // if (seconds < 0 || seconds > 59) {
-    //     cout << "Incorrect seconds...\n";
-    // }
-
-    ////////////////////////////////////////////////////////////////////
+    // From Celcium to Farengeit
+    /*int from, to;
+    cout << "FROM ... TO: ";
+    cin >> from >> to;
+    cout << "================================\n";
+    cout << "|    Celcium    |   Farengeit   |\n";
+    for (int i = from; i < to; ++i) {
+        cout << "|\t" << i << "\t|\t" << (9.0 / 5.0) * i + 32 << "\t|\n";
+    }
+    cout << "================================\n";*/
 
     //5
-    //Lucky trams ticket with 6 digits
-
-    // cout << "Input number of ticket(******): ";
-    // int ticket_num = 0;
-    // cin >> ticket_num;
-
-    // int n6 = (ticket_num / 1) % 10;
-    // int n5 = (ticket_num / 10) % 10;
-    // int n4 = (ticket_num / 100) % 10;
-    // int n3 = (ticket_num / 1000) % 10;
-    // int n2 = (ticket_num / 10000) % 10;
-    // int n1 = (ticket_num / 100000) % 10;
-
-    // int sum_left = n1 + n2 + n3;
-    // int sum_right = n4 + n5 + n6;
-
-    // if (sum_left == sum_right) {
-    //     cout << "Lucky ticket!!))\n";
-    // }
-    // else {
-    //     cout << "...Hmm...\n";
-    // }
-
-    /////////////////////////////////////////////////////////////
+    //Factorial n
+    /*int N = 0;
+    cout << "N: " ;
+    cin >> N;
+    long int F = 1;
+    for (int i = 2; i <= N; ++i) {
+        F *= i;
+    }
+    cout << N << "! = " << F << endl;*/
 
     //6
-    //Greetings (hour)
-
-    // int hours = 0;
-    // cout << "Input hours(0-23): ";
-    // cin >> hours;
-    // if (hours >= 16) {
-    //     cout << "Good Evening!";
-    // } 
-    // else if (hours >= 12) {
-    //     cout << "Good Day!";
-    // }
-    // else if (hours >= 4) {
-    //     cout << "Good Mornig!";
-    // }
-    // else  {
-    //     cout << "Good Night!";
-    // }
-    // cout << endl;
-
-    /////////////////////////////////////////////////////////////
+    // length and sum of num(N)
+    /*long long N = 0l;
+    cout << "N: " ;
+    cin >> N;
+    long long tmp = N;
+    int size = 0;
+    int sum = 0;
+    while (tmp) {
+        int current = tmp % 10;
+        sum += current;
+        size++;
+        tmp /= 10;
+    }
+    cout << "size: " << size << endl;
+    cout << "sum: " << sum << endl;*/
 
     //7
-    //Perfect weight and height
+    //Reverse nums (123 -> 321)
+    /*long long N = 0L;
+    cout << "N: " ;
+    cin >> N;
+    long long tmp = N;
+    long long R = 0;
+    int n = 1;
 
-    // int const HEIGHT_LOW = 45;
-    // int const HEIGHT_UP = 245;
+    while (tmp) {
+        n *= 10;
+        tmp /= 10;
+    }
+    tmp = N;
+    while (n) {
+        int current = tmp % 10;
+        n /= 10;
+        R += current * n;
+        tmp /= 10;
+    }
+    cout << N << " -> " << R << endl;*/
 
-    // int const WEIGHT_LOW = 10;
-    // int const WEIGHT_UP = 500;
+    //8
+    //mod from 1 to N
+    /*int N = 0;
+    cout << "N: ";
+    cin >> N;
+    for (int i = 1; i <= N; ++i) {
+        if (N % i == 0) {
+            cout << i << " ";
+        }
+    } cout << endl;*/
 
-    // int const PERFECT_DIF_MAN = 100;
-    // int const PERFECT_DIF_WOMAN = 110;
+    //9
+    //Simple N
+    /*int N = 0;
+    cout << "N: ";
+    cin >> N;
+    bool isNSimple = true;
+    for (int i = 2; i <= N/2 && isNSimple; ++i) {
+        if (0 == N % i) {
+            isNSimple = false;
+        }
+    }
+    cout << "N -> simple: " << isNSimple << endl;*/
 
-    // cout << "Your sex(m,f): ";
-    // char sex;
-    // cin >> sex;
-    // if (sex != 'm' && sex != 'f') {
-    //     cout << "...Unknown gender error...\n";
-    //     return 101;
-    // }
+    //10 Does the num have two digits
+    /*int N = 0;
+    cout << "N: ";
+    cin >> N;
+    int tmp = N;
+    int prev = -1;
+    int cur;
+    bool flag = false;
+    while (tmp && !flag) {
+        if (tmp != N) {
+            prev = cur;
+        }
+        cur = tmp % 10;
+        if (prev == cur && tmp != N) {
+            flag = true;
+        }
+        tmp /= 10;
+    }
+    if (flag) {
+        cout << "В этом числе две цифпы подряд одинаковы!" << endl;
+    }*/
 
-    // cout << "Your height(sm): ";
-    // int height = 0;
-    // cin >> height;
-    // if (height < HEIGHT_LOW || height > HEIGHT_UP) {
-    //     cout << "...Out of bound of height error...\n";
-    //     return 404;
-    // }
-
-    // cout << "Your weight(kg): ";
-    // int weight = 0;
-    // cin >> weight;
-    // if (weight < WEIGHT_LOW || weight > WEIGHT_UP) {
-    //     cout << "...Out of bound of weight error...\n";
-    //     return 103;
-    // }
-
-    // int perfect_weight = (sex == 'm') ? (height - PERFECT_DIF_MAN)
-    //                            : (height - PERFECT_DIF_WOMAN);
-    // if (weight < perfect_weight) {
-    //     cout << "You ought to put on weight " << perfect_weight - weight
-    //          << endl;
-    // } 
-    // else if (weight > perfect_weight) {
-    //      cout << "You ought to lose weight " << weight - perfect_weight
-    //          << endl;
-    // }
-    //  else {
-    //      cout << "You have a perfect weight!!!" << endl;
-    // }
-
-    /////////////////////////////////////////////////////////////
-
-    //8 Next Day
-
-    // Data prev;
-    // cout << "Input data(d:m:y): ";
-    // cin >> prev.day >> prev.month >> prev.year;
-    // if (prev.year < 0 ||
-    //     prev.month <= 0 || prev.month > MON || 
-    //     prev.day <= 0 || prev.day > days[prev.month-1]) {
-    //     cout << "Incorrect data...\n";
-    //     return 101;
-    // }
-
-    // Data next;
-    // next.month = prev.month;
-    // next.year = prev.year;
-    // //leaps year ammend
-    // int leap_february_add = 
-    // (isLeapYear(prev.year) && prev.month == MONTHES::FEB) ? 1 : 0;
-    // next.day = (prev.day + 1) % (days[prev.month - 1] + 1 + leap_february_add);
-    // if (next.day == 0) {
-    //     next.day = 1;
-    //     next.month = (prev.month + 1) % (MON + 1); 
-    // }
-
-    // if (next.month == 0) {
-    //     next.month = 1;
-    //     next.year++;
-    // }
-
-    // cout << next.day << "." << next.month << "." << next.year << endl; 
-
-    /////////////////////////////////////////////////////////////
-
-    //9 Animals behaviour
-
-    // int animal;
-    // cout << "\tCAT(1)\n";
-    // cout << "\tDOG(2)\n";
-    // cout << "\tCOW(3)\n";
-    // cout << "\tSHEEP(4)\n";
-    // cout << "\tDONKEY(5)\n";
-    // cout << "\tHORSE(6)\n";
-    // cout << "\tPIG(7)\n";
-    // cout << "\tRUSTER(8)\n";
-    // cout << "\tTURKEY(9)\n";
-    // cout << "\tCROW(10)\n";
-    // cout << "Choose Animal: ";
-
-    
-    // cin >> animal;
-    // switch (animal) {
-    //     case ANIMALS::CAT:
-    //     cout << "..Miau..Murr...\n";
-    //     break;
-
-    //     case ANIMALS::DOG:
-    //     cout << "..Wwaaw...Tiav..tiav...\n";
-    //     break;
-
-    //     case ANIMALS::COW:
-    //     cout << "..Muu..Muuu...\n";
-    //     break;
-
-    //     case ANIMALS::SHEEP:
-    //     cout << "..Beee..Beee...\n";
-    //     break;
-
-    //     case ANIMALS::DONKEY:
-    //     cout << "..Ia..Ia...\n";
-    //     break;
-
-    //     case ANIMALS::HORSE:
-    //     cout << "..Iiggogo..Iigogo...\n";
-    //     break;
-
-    //     case ANIMALS::PIG:
-    //     cout << "..Qee..Quee...\n";
-    //     break;
-
-    //     case ANIMALS::RUSTER:
-    //     cout << "..Kuka-reku..Kuka-reku...\n";
-    //     break;
-
-    //     case ANIMALS::TURKEY:
-    //     cout << "..Guul..Guul-guul...\n";
-    //     break;
-
-    //     case ANIMALS::CROW:
-    //     cout << "..Kharr..Kharr...\n";
-    //     break;
-        
-    //     default:
-    //     cout << "...Undefined behaviour\n";
-    //     break;
-    // }
-
-    /////////////////////////////////////////////////////////////
-
-    //10 O schaslivchik
-    // random_shuffle(begin(answers), end(answers));
-
-    // size_t size = sizeof answers / sizeof answers[0];
-    // for (size_t i = 0; i < size; ++i) {
-    //     cout << answers[i].answer;
-    //     int answer = 0;
-    //     cout << ": ";
-    //     cin >> answer;
-
-    //     if (answer != answers[i].right) {
-    //         cout << "\n\tGame Over....\n";
-    //         return 101;
-    //     }
-    // }
-    // cout << "CONGRATULATIONS!!!\n";
-
-    /////////////////////////////////////////////////////////////
-
-    //11 forecast
-
-    // int T = 0;
-    // cout << "T(*C): ";
-    // cin >> T;
-    // if (T >= T_TOO_HOT) {
-    //     cout << "It's too hot\n";
-    // } 
-    // else if (T >= T_HOT) {
-    //      cout << "It's hot\n";
-    // }
-    // else if (T >= T_WARMY) {
-    //     cout << "It's warmy\n";
-    // }
-    // else if (T >= T_COOL) {
-    //     cout << "It's cool\n";
-    // }
-    // else if (T >= T_COLDLY) {
-    //     cout << "It's coldly\n";
-    // }
-    // else if (T >= T_COLD) {
-    //     cout << "It's cold\n";
-    // }
-    // else if (T >= T_FROZENLY) {
-    //     cout << "It's frozenly\n";
-    // }
-    // else if (T >= T_VERY_FROZEN) {
-    //     cout << "It's very frozen\n";
-    // }
-    // else if (T >= T_DEEP_FROZEN) {
-    //     cout << "It's too frozen\n";
-    // }
-    // else {
-    //     cout << "It's extremaly frozen\n";
-    // }
+    //11
+    // ordered digits in num
+    /*int N;
+    cout << "N: " ;
+    cin >> N;
+    int tmp = N;
+    int cur;
+    int prev = -1;
+    bool flag = true;
+    while (tmp && flag) {
+        if (tmp != N) {
+            prev = cur;
+        }
+        cur = tmp % 10;
+        if (prev < cur && tmp != N) {
+            cout << "unordered digits\n" ;
+            flag = false;
+        }
+        tmp /= 10;
+    }*/
 
     //12
-    //mystic
+    //CPU try to guess a number from 1 to 1000
+    /*size_t const LEFT = 1;
+    size_t const RIGHT = 1000;
+    size_t secret = rand() % (RIGHT - LEFT) + LEFT;
+    bool flag = false;
+    const int TRIES = 10;
+    size_t left = LEFT;
+    size_t right = RIGHT;
+    for (size_t i = 0; !flag && i < TRIES; ++i) {
+        size_t midle = (left + right) / 2;
+        cout << i + 1 << ": " << midle << "\t";
+        if (midle == secret) {
+            cout << "\nYou have just guess number. Congratulations!!!\n" ;
+            flag = true;
+        }
+        else if (midle < secret) {
+            cout << "My number is graiter then this one\n";
+            left = midle + 1;
+        } else {
+            cout << "My number is less then this one\n";
+            right = midle - 1;
+        }
+    }*/
 
-    // const int LENGTH = 20;
+    //13
+    //Lucky's tickets output
+    /*size_t const LEFT =  100000;
+    size_t const RIGHT = 999999;
 
-    // cout << "Your answer: ";
-    // char ch;
-    // cin >> ch;
-
-    // int ask = rand() % LENGTH;
-
-    // switch (ask) {
-    //     case 0:
-    //     cout << "Бесспорно" << endl;
-    //     break;
-
-    //     case 1:
-    //     cout << "Предрешено" << endl;
-    //     break;
-
-    //     case 2:
-    //     cout << "Никаких сомнений" << endl;
-    //     break;
-
-    //     case 3:
-    //     cout << "Определённо да" << endl;
-    //     break;
-
-    //     case 4:
-    //     cout << "Можешь быть уверен в этом" << endl;
-    //     break;
-
-    //     case 5:
-    //     cout << "Мне кажется — «да»" << endl;
-    //     break;
-
-    //     case 6:
-    //     cout << "Вероятнее всего" << endl;
-    //     break;
-
-    //     case 7:
-    //     cout << "Хорошие перспективы" << endl;
-    //     break;
-
-    //     case 8:
-    //     cout << "Знаки говорят — «да»" << endl;
-    //     break;
-
-    //     case 9:
-    //     cout << "Да" << endl;
-    //     break;
-
-    //     case 10:
-    //     cout << "Пока не ясно, попробуй снова" << endl;
-    //     break;
-
-    //     case 11:
-    //     cout << "Спроси позже" << endl;
-    //     break;
-
-    //     case 12:
-    //     cout << "Лучше не рассказывать" << endl;
-    //     break;
-
-    //     case 13:
-    //     cout << "Сейчас нельзя предсказать" << endl;
-    //     break;
-
-    //     case 14:
-    //     cout << "Сконцентрируйся и спроси опять" << endl;
-    //     break;
-
-    //     case 15:
-    //     cout << "Даже не думай" << endl;
-    //     break;
-
-    //     case 16:
-    //     cout << "Мой ответ — «нет»" << endl;
-    //     break;
-
-    //     case 17:
-    //     cout << "По моим данным — «нет»" << endl;
-    //     break;
-
-    //     case 18:
-    //     cout << "Перспективы не очень хорошие" << endl;
-    //     break;
-
-    //     case 19:
-    //     cout << "Весьма сомнительно" << endl;
-    //     break;
-    // }
-
-    //13 zodiac
-    // Data user_data;
-    // cout << "User birthday(day : month) : ";
-    // cin >> user_data.day >> user_data.month;
-    // int user_zodiac;
-    
-    // if ((user_data.month == 12 && user_data.day >= 23) ||
-    //      (user_data.month == 1 && user_data.day <= 20)) {
-    //     user_zodiac = ZODIACS::KOZEROG;
-    // }
-    // else if ((user_data.month == 1 && user_data.day >= 21) ||
-    //      (user_data.month == 2 && user_data.day <= 19)) {
-    //     user_zodiac = ZODIACS::VODOLEY;
-    // }
-    // else if ((user_data.month == 2 && user_data.day >= 20) ||
-    //      (user_data.month == 3 && user_data.day <= 20)) {
-    //     user_zodiac = ZODIACS::RYBY;
-    // }
-    // else if ((user_data.month == 3 && user_data.day >= 21) ||
-    //      (user_data.month == 4 && user_data.day <= 20)) {
-    //     user_zodiac = ZODIACS::OVEN;
-    // }
-    // else if ((user_data.month == 4 && user_data.day >= 21) ||
-    //      (user_data.month == 5 && user_data.day <= 21)) {
-    //     user_zodiac = ZODIACS::TELEC;
-    // }
-    // else if ((user_data.month == 5 && user_data.day >= 22) ||
-    //      (user_data.month == 6 && user_data.day <= 21)) {
-    //     user_zodiac = ZODIACS::BLYZNICY;
-    // }
-    // else if ((user_data.month == 6 && user_data.day >= 22) ||
-    //      (user_data.month == 7 && user_data.day <= 22)) {
-    //     user_zodiac = ZODIACS::RAK;
-    // }
-    // else if ((user_data.month == 7 && user_data.day >= 23) ||
-    //      (user_data.month == 8 && user_data.day <= 21)) {
-    //     user_zodiac = ZODIACS::LEV;
-    // }
-    // else if ((user_data.month == 8 && user_data.day >= 22) ||
-    //      (user_data.month == 9 && user_data.day <= 23)) {
-    //     user_zodiac = ZODIACS::DEVA;
-    // }
-    // else if ((user_data.month == 9 && user_data.day >= 23) ||
-    //      (user_data.month == 10 && user_data.day <= 23)) {
-    //     user_zodiac = ZODIACS::VESY;
-    // }
-    // else if ((user_data.month == 10 && user_data.day >= 24) ||
-    //      (user_data.month == 11 && user_data.day <= 22)) {
-    //     user_zodiac = ZODIACS::SCORPION;
-    // }
-    // else if ((user_data.month == 11 && user_data.day >= 23) ||
-    //      (user_data.month == 12 && user_data.day <= 20)) {
-    //     user_zodiac = ZODIACS::STRELEC;
-    // }
-
-    // switch (user_zodiac) {
-    //     case ZODIACS::OVEN:
-    //     cout << R"(
-    //     Обстоятельства этой недели вызовут у Овнов небольшую растерянность. 
-    //     Представители знака Зодиака Овен будут подсознательно чувствовать 
-    //     тревогу от общения с кем-то из новых соседей или друзей. 
-    //     Возможно, лучше не форсировать события на пути сближения с этим 
-    //     человеком. Спешить не нужно и в домашних делах. 
-    //     Астрологическая картина этой недели не исключает бытовых травм
-    //     и ушибов.
-
-    //     Необходимо следить и за тем, каков уровень ваших жизненных сил. 
-    //     Дорогие Овны, порой следует отказаться от «неотложных» дел ради 
-    //     восстановления организма. Энергия станет расти, если окружите 
-    //     себя всем тем, что особенно любите. Звёзды не советуют 
-    //     злоупотреблять алкоголем и превышать калорийность своего рациона.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::TELEC:
-    //     cout << R"(
-    //     Tельцам на этой неделе, скорее всего, не избежать недомолвок и сплетен.
-    //     Постарайтесь не привлекать к себе слишком много внимания, не пытайтесь
-    //     перетягивать одеяло в ходе диалога. Скромность и простота
-    //     приветствуются буквально во всём. Астрологическая обстановка этой
-    //     недели в целом благоприятна для старта новых идей
-    //     (тех, которыми можете заниматься и без союзников).
-
-    //     К середине недели у многих из вас появятся на руках главные козыри.
-    //     Возможно, станет более понятной ситуация в личных делах или
-    //     состоится знакомство, способное стать судьбоносным.
-    //     Семейным Тельцам не желательно тратить словарный запас на
-    //     попытки примирить конфликтующих родственников. Наблюдайте
-    //     за ними со стороны, и скоро они сами решат сесть за стол переговоров.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::BLYZNICY:
-    //     cout << R"(
-    //     Начало недели для Близнецов ознаменуется необычным предложением.
-    //     Не торопитесь его отвергать. Не исключено, что прозвучавшее если
-    //     не целиком, то частично, можно использовать с расчётом на будущее.
-    //     В середине недели у вас, дорогие Близнецы, возрастёт творческая
-    //     составляющая жизни. Смело беритесь за «пробу пера» в любом
-    //     интересном для вас направлении.
-
-    //     Астрологическая картина этой недели почти полностью исключает
-    //     вероятность неожиданностей в личных делах. Семейные Близнецы
-    //     увидят от своих вторых половинок и романтизм, и обожание, 
-    //     и открытость для продуктивного общения. Тем, кто пока не нашёл
-    //     спутника жизни, следует менее требовательно смотреть на сферу
-    //     чувств и отказаться от поиска идеала.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::RAK:
-    //     cout << R"(
-    //     У Раков на этой неделе почти не останется времени на отдых.
-    //     Каждое дело, которое будут начинать представители вашего знака
-    //     Зодиака, приблизит успех. Особенно продуктивно будут удаваться
-    //     переговоры и обсуждения. Настойчивее боритесь за свои права,
-    //     допустив в своём голосе нотки металла.
-
-    //     Во второй половине недели гороскоп советует не вмешиваться в
-    //     происходящие события. Пока мир нестабилен, куда правильнее будет
-    //     заниматься своим самочувствием, красотой, повышением
-    //     энергетического потенциала. Дорогие Раки, скептически относитесь
-    //     ко всем новостным вбросам в этот период. Далеко не вся входящая
-    //     информация исходит из достоверных источников и уж точно не
-    //     вся заслуживает вашего внимания.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::LEV:
-    //     cout << R"(
-    //     Неделя благоприятна для того, чтобы Львы могли приблизить свой
-    //     успех. Гороскоп советует прислушаться к пожеланиям своего
-    //     ближайшего круга общения. Эти люди для вас гораздо больше,
-    //     нежели просто союзники. Успех во многом будет зависеть от
-    //     установленных между вами договорённостей.
-
-    //     Не следует забывать и о повседневных делах. Во второй половине
-    //     недели возможно неожиданное развитие событий в том процессе,
-    //     который, как вы считали, не требует внимания. Откорректируйте
-    //     поведение, проведите работу над ошибками, и ни в коем случае
-    //     не останавливайтесь на достигнутом. Выходные этой недели
-    //     будет хорошо посвятить близким членам семьи или любимому человеку.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::DEVA:
-    //     cout << R"(
-    //     На этой неделе представители знака Зодиака Дева проявят стремление
-    //     к независимости. Следите, чтобы борьба за свободу не мешала делам.
-    //     В них на первом месте по-прежнему суммарный итог командных трудов,
-    //     а не возможность потешить своё самолюбие. Астрологическая
-    //     обстановка недели не предполагает неожиданностей. Этот спокойный
-    //     и гармоничный период желательно посвятить активному продвижению
-    //     своих природных талантов.
-
-    //     В личных делах Девам не придётся кого-то убеждать в своей правоте.
-    //     Близкие люди будут открыты для диалога и обсуждения свежих идей.
-    //     Если на повестке дня вопросы, связанные с имуществом, наследством
-    //     или недвижимостью, следует воспользоваться советом эксперта.
-    //     Импульсивные решения могут быть опасны.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::VESY:
-    //     cout << R"(
-    //     Весам на этой неделе удастся разобраться c одной из запутанных
-    //     ситуаций. Однако гороскоп не гарантирует, что, пролив свет на этот
-    //     вопрос, вы будете удовлетворены полученным итогом. Многое потребует
-    //     доработки или корректировки. В начале недели может проявиться 
-    //     лёгкая грусть. Дорогие Весы, вы быстро избавитесь от депрессивного
-    //     настроя, если вспомните о прошлых победах и мотивируете себя с
-    //     надеждой посмотреть в будущее.
-
-    //     Личные отношения на протяжении недели будут развиваться своим
-    //     чередом. Одинокие представители знака Зодиака Весы при желании
-    //     смогут привлечь к себе внимание интересующего вас человека.
-    //     Семейные Весы, решив потешить тщеславие, рискуют вызвать приступ
-    //     ревности со стороны своего партнёра по отношениям.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::SCORPION:
-    //     cout << R"(
-    //     Скорпионы на этой неделе почувствуют прирост жизненных сил.
-    //     Это отличное время, чтобы перейти от планирования к активным
-    //     действиям. Если ваша главная цель — нечто конкретное в домашних
-    //     делах, итоги каждого из таких начинаний окажутся впечатляющими.
-
-    //     Гороскоп не рекомендует терять драгоценное время и в делах
-    //     личных. Во второй половине недели станет понятно, кто настоящий
-    //     друг, а кто всего лишь пользуется вашим доверием. Не стоит
-    //     переживать. Прервав малоприятный контакт, вы готовите свободное
-    //     место, чтобы впустить в свою жизнь более подходящего вам
-    //     человека — честного и порядочного.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::STRELEC:
-    //     cout << R"(
-    //     Уравновешенность Стрельцов на этой неделе будет достойна похвал,
-    //     и нет таких дел, в которых вы бы не смогли разобраться в этот
-    //     период. Астрологическая обстановка не исключает необходимости
-    //     тушить разногласия между родственниками, коллегами или соседями.
-
-    //     К концу недели вам, дорогие Стрельцы, рекомендуется слегка снизить
-    //     финансовый аппетит. Попробуйте рассмотреть бюджетные аналоги тех
-    //     вещей, которые хотели бы приобрести, не отказывайтесь от
-    //     консультации со специалистами интернет-магазинов. На выходных
-    //     может напомнить о себе человек из вашего детства. Воскресенье
-    //     оставит приятные воспоминания.
-
-    //     )";
-    //     break;
-
-    //     case ZODIACS::KOZEROG:
-    //     cout << R"(
-    //     Неделя благоприятная, не грузит проблемами, но и интересных событий
-    //     также пока не предвидится. Гороскоп рекомендует Козерогам поработать
-    //     над собой. Это отличное время учиться и развиваться как внешне, так
-    //     и внутренне. Все важные решения перенесите на следующую неделю.
-
-    //     В конце недели Козерогам следует избегать недосказанности в личных
-    //     беседах, и старайтесь мысленно проговаривать каждую фразу прежде,
-    //     чем её произнести. Гороскоп рекомендует в этот период избегать
-    //     легковерности. Есть риск, что кто-то намерен лишить вас объективной
-    //     картины происходящих событий, представив всё в выгодном для себя виде.
-
-    //     )";
-    //     break;
-    // }
-
-    ////////////////////////////////////////////////////////////////////////
+    for (size_t i = LEFT, cnt = 0; i <= RIGHT; ++i) {
+        size_t l_sum = 0;
+        size_t r_sum = 0;
+        size_t tmp = i;
+        for (int j = 0; j < 6; ++j, tmp /= 10) {
+            size_t cur = tmp % 10;
+            if (j < 3) {
+                l_sum += cur;
+            }
+            else {
+                r_sum += cur;
+            }
+        }
+        if (l_sum == r_sum) {
+            cnt++;
+            if (cnt && cnt % 10 == 0) cout << endl;
+            cout << i << " " ;
+        }
+    }
+    cout << endl;*/
 
     //14
-    // Chickens and egs
+    //12345
+    /*long long const LEFT =  10000000;
+    long long const RIGHT = 99999999;
+    long long delim = 12345;
+    long long cnt = 0;
+    for (long long i = LEFT; i <= RIGHT; ++i) {
+        if (0 == i % delim) {
+            cout << i << endl;
+            ++cnt;
+        }
+    }
+    cout << "\tcnt: " << cnt << endl;*/
 
-    // double const NDS = 0.8;
+    //15
+    // bynary oct hex
+    /*size_t const BYNARY = 2;
+    size_t const OCT = 8;
+    size_t const HEX = 16;
+    size_t num;
+    cout << "num: ";
+    cin >> num;
+    cout << num << "\t";
+    printDigits(num, BYNARY);
+    cout << "\t";
+    printDigits(num, OCT);
+    cout << "\t0x";
+    printDigits(num, HEX);
+    cout << endl;*/
 
-    // int N; //cn-t chickens
-    // double M; // Price of a chicken
+    //16
+    /*Реализовать игровую программу «Однорукий бандит»*/
 
-    // int X; //cn-t eggs in week
-    // double Z; // Price of 10 eggs
+    /*int const SZ = 8;
+    int credits = 5000;
+    Threebits bandyt;
+    bool flagWin = false;
+     do {
+        bandyt.f = rand() % SZ;
+        bandyt.s = rand() % SZ;
+        bandyt.t = rand() % SZ;
+        evaluate(bandyt, credits);
+        displayBandit(bandyt);
+        currentPay(credits);
+        displayCredit(credits);
+        flagWin = isWin(bandyt);
+    } while (!flagWin && !isDefeat(credits));
+    if (flagWin) {
+        cout << "Congratulation!! You won jackpot!!)))\n";
+    }
+    else {
+        cout << "GAME OVER!\n";
+    }*/
 
-    // cout << "Chickens: ";
-    // cin >> N;
+    Dragon Smaug;
+    Pickman pickman;
+    int pickmans = 0;
+    cout << "Input dragons(hitpoint, demage): " ;
+    cin >> Smaug.hp >> Smaug.damage;
 
-    // cout << "Price of a chicken: ";
-    // cin >> M;
+    cout << "Input pickman(hitpoint, demage): " ;
+    cin >> pickman.hp >> pickman.damage;
 
-    // cout << "How many eggs it gets in a week from one chicken: ";
-    // cin >> X;
+    cout << "how many pickmans you can by: ";
+    cin >> pickmans;
 
-    // cout << "Price of 10 eggs: ";
-    // cin >> Z;
+    while (true) {
+        int pickmans_total_dmg = pickmans * pickman.damage;
+        int pickmans_total_hp = pickmans * pickman.hp;
+        Smaug.hp -= pickmans_total_dmg;
+        cout << "Копейщики атакуют(" << "урон "  << pickmans_total_dmg << ")"
+             << " - у дракона осталось " << Smaug.hp << " очков здоровья.\n";
+        if (!isAlive(Smaug)) {
+            cout << "Копейщики побеждают!!\n ";
+            break;
+        }
 
-    // double spending = N * M;
-    // double profite_per_week = (N * X) / 10.0 * Z * NDS;
-    // double weeks = spending / profite_per_week;
+        pickmans_total_hp -= Smaug.damage;
+        if (pickmans_total_hp <= 0) {
+            cout << "Дракон побеждает.\n" ;
+            break;
+        }
+        pickmans = pickmans_total_hp / pickman.hp;
+        int injured = pickmans_total_hp % pickman.hp;
+        if (injured) {
+            ++pickmans;
+        }
 
-    // cout << "You have to spend " << weeks << endl;
-
-	return 0;
+        if (pickmans == 0) {
+            cout << "Дракон побеждает.\n" ;
+            break;
+        }
+        cout << "Дракон атакует (урон " << Smaug.damage << ") – осталось "
+             << pickmans;
+        if (injured) {
+            cout << " копейщиков один из которых ранен (осталось " << injured << " очков здоровья).";
+        }
+        else {
+            cout << " копейщиков.";
+        }
+        cout << endl;
+    }
+    return 0;
 }
+
+////////////////////////////////////////////////////////////////////////
+
+bool isAlive(Monster const &obj) {
+    return obj.hp > 0;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void printDigits(size_t n, size_t exp) {
+    if (n == 0) {
+        return;
+    }
+    //cout << n % exp;
+    printDigits(n / exp, exp);
+    //cout << n % exp;
+    size_t cur = n % exp;
+    if (cur < 10) {
+        cout << cur;
+    }
+    else {
+        cout << (char) ('A' + cur - 10);
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+
+void displayCredit(int const &credits) {
+    cout << "Total credits: " << credits << endl;
+}
+
+void currentPay(int &credits) {
+    credits -= SIMPLE_PAY;
+}
+
+void evaluate(Threebits threebits, int & pInt) {
+    //pInt -= 100;
+    if (threebits.f == 0 && threebits.s == 0 && threebits.t == 0) {
+        pInt += 100;
+    }
+    else if (threebits.f == 1 && threebits.s == 1 && threebits.t == 1) {
+        pInt += 150;
+    }
+    else if (threebits.f == 2 && threebits.s == 2 && threebits.t == 2) {
+        pInt += 200;
+    }
+    else if (threebits.f == 3 && threebits.s == 3 && threebits.t == 3) {
+        pInt += 250;
+    }
+    else if (threebits.f == 4 && threebits.s == 4 && threebits.t == 4) {
+        pInt += 300;
+    }
+    else if (threebits.f == 5 && threebits.s == 5 && threebits.t == 5) {
+        pInt += 250;
+    }
+    else if (threebits.f == 7 && threebits.s == 7 && threebits.t == 7) {
+        pInt += 0;
+    }
+    else if (threebits.f == 7 && threebits.s == 7) {
+        pInt += 50;
+    }
+    else if (threebits.f == 7) {
+        pInt += 25;
+    }
+    else if (threebits.f == 5 && threebits.s == 5) {
+        pInt += 50;
+    }
+    else if (threebits.f == 5) {
+        pInt += 25;
+    }
+    else if (threebits.f == 6 && threebits.s == 6 && threebits.t == 6) {
+        pInt -= 1000;
+    }
+}
+
+void displayBandit(Threebits const& threebits) {
+    cout << "\t" << threebits.f << " : " << threebits.s
+        << " : " << threebits.t << endl;
+}
+
+bool isDefeat(int credits) {
+    //cout << "#credits : " << credits << endl;
+    return credits <= 0;
+}
+
+bool isWin(Threebits const& threebits) {
+    return threebits.f == 7 && threebits.s == 7 && threebits.t == 7;
+}
+
+/////////////////////////////////////////////////////////////////

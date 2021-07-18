@@ -1,0 +1,3 @@
+/home/dima/gitrepositories/step/cpp_pro/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/dima/gitrepositories/step/cpp_pro/cmake-build-debug/CMakeFiles/step.dir
+/home/dima/gitrepositories/step/cpp_pro/cmake-build-debug/CMakeFiles/edit_cache.dir

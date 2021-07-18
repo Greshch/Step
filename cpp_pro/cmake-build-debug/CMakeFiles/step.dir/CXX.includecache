@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dima/gitrepositories/step/cpp_pro/src/main.cpp
+iostream
+-
+time.h
+-
+cmath
+-
+string
+-
+stack
+-
+

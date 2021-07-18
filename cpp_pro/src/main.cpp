@@ -1,450 +1,949 @@
 #include <iostream>
 #include <time.h>
+#include <cmath>
+#include <string>
+#include <stack>
+
 using namespace std;
-///////////////////////////////////////////
-struct Threebits {
-    size_t f;
-    size_t s;
-    size_t t;
+
+size_t GetSize(size_t i);
+size_t GetSumArmstrong(size_t i, size_t sz);
+
+bool IsSimple( size_t n);
+size_t GetSumPerfect(size_t n);
+
+int month_days[13] = {
+        0,
+        31, 28,
+        31,30,31,
+        30,31,31,
+        30,31,30,
+        31
 };
-
-int const SIMPLE_PAY = 250;
-
-bool isWin(Threebits const& threebits);
-
-bool isDefeat(int credits);
-
-void displayBandit(Threebits const& threebits);
-
-void evaluate(Threebits threebits, int &pInt);
-
-void currentPay(int &credits);
-
-void displayCredit(int const &credits);
-
-////////////////////////////////////////////////
-
-void printDigits(size_t n, size_t exp);
-
-////////////////////////////////////////////////
-
-struct Monster {
-    int hp;
-    int damage;
-};
-
-struct Pickman : public Monster {
+std::string month_names[13] {
+    "",
+    "January", "February",
+    "March", "April", "May",
+    "June", "July", "August",
+    "September", "October", "November",
+    "December"
 
 };
 
-struct Dragon : public Monster {
+int GetDaysFromMonth(int month, int year);
 
+bool IsLeapYear(int year);
+
+struct struct_date
+{
+    char day;
+    char month;
+    short year;
 };
 
-bool isAlive(Monster const &dragon);
+int what_day(struct struct_date const& date);
+
+void PrintMonth(int month, int year);
+
+bool IsFourIncludes(int n);
+
+bool IsThirteenIncludes(int n);
+
+
+void PrintDigit(int n);
+
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-    srand(time(NULL));
     //1
-    // star's line output
-    /*cout << "stars in line: " ;
-    size_t stars = 0;
-    cin >> stars;
-    for (size_t i = 0; i < stars; ++i) {
-        cout << "*";
-    }   cout << endl;*/
+    /*srand(time(0));
+    int const LEFT_BOUND = -100;
+    int const RIGHT_BOUND = 100;
+    int const CNT = 100;
+    int plus = 0;
+    int minus = 0;
+    int zero = 0;
+    int odd = 0;
+    int event = 0;
+    for (int i = 0; i < CNT; ++i) {
+        int curent = LEFT_BOUND + rand() % (RIGHT_BOUND - LEFT_BOUND + 1);\
+        if (curent > 0) plus++;
+        else if (curent < 0) minus++;
+        else zero++;
+
+        if (0 == curent % 2)    event++;
+        else    odd++;
+    }
+    cout << " > 0 -> " <<  1.0 * plus / CNT * 100  << "%" << endl;
+    cout << " < 0 -> " <<  1.0 * minus / CNT * 100  << "%" << endl;
+    cout << "   0 -> " <<  1.0 * zero / CNT * 100  << "%" << endl;
+    cout << " event -> " <<  1.0 * event / CNT * 100  << "%" << endl;
+    cout << " odd -> " <<  1.0 * odd / CNT * 100  << "%" << endl;*/
 
     //2
-    // event nums output from 1 to 100
-    /*int const FROM = 2;
-    int const TO = 100;
-    for (int i = FROM; i <= TO; i += 2) {
-        cout << i << " " ;
-        if (0 == i % 50) { cout << endl; }
-    } cout << endl;*/
-
-    //3
-    // sum from M to N;
-    /*int M, N, sum = 0;
-    cout << "N,M: ";
-    cin >> N >> M;
-    for (int i = N; i <= M; ++i) {
-        sum += i;
-    }
-    cout << "sum: " << sum << endl;*/
-
-    //4
-    // From Celcium to Farengeit
-    /*int from, to;
-    cout << "FROM ... TO: ";
-    cin >> from >> to;
-    cout << "================================\n";
-    cout << "|    Celcium    |   Farengeit   |\n";
-    for (int i = from; i < to; ++i) {
-        cout << "|\t" << i << "\t|\t" << (9.0 / 5.0) * i + 32 << "\t|\n";
-    }
-    cout << "================================\n";*/
-
-    //5
-    //Factorial n
-    /*int N = 0;
-    cout << "N: " ;
-    cin >> N;
-    long int F = 1;
-    for (int i = 2; i <= N; ++i) {
-        F *= i;
-    }
-    cout << N << "! = " << F << endl;*/
-
-    //6
-    // length and sum of num(N)
-    /*long long N = 0l;
-    cout << "N: " ;
-    cin >> N;
-    long long tmp = N;
-    int size = 0;
-    int sum = 0;
-    while (tmp) {
-        int current = tmp % 10;
-        sum += current;
-        size++;
-        tmp /= 10;
-    }
-    cout << "size: " << size << endl;
-    cout << "sum: " << sum << endl;*/
-
-    //7
-    //Reverse nums (123 -> 321)
-    /*long long N = 0L;
-    cout << "N: " ;
-    cin >> N;
-    long long tmp = N;
-    long long R = 0;
-    int n = 1;
-
-    while (tmp) {
-        n *= 10;
-        tmp /= 10;
-    }
-    tmp = N;
-    while (n) {
-        int current = tmp % 10;
-        n /= 10;
-        R += current * n;
-        tmp /= 10;
-    }
-    cout << N << " -> " << R << endl;*/
-
-    //8
-    //mod from 1 to N
-    /*int N = 0;
-    cout << "N: ";
-    cin >> N;
-    for (int i = 1; i <= N; ++i) {
-        if (N % i == 0) {
-            cout << i << " ";
+    /*int const LEFT = 1;
+    int const RIGHT = 10;
+    for (int i = LEFT; i <= RIGHT; ++i) {
+        for (int j = LEFT; j <= RIGHT; ++j) {
+            cout << i * j;
+            cout << "\t";
         }
-    } cout << endl;*/
-
-    //9
-    //Simple N
-    /*int N = 0;
-    cout << "N: ";
-    cin >> N;
-    bool isNSimple = true;
-    for (int i = 2; i <= N/2 && isNSimple; ++i) {
-        if (0 == N % i) {
-            isNSimple = false;
-        }
-    }
-    cout << "N -> simple: " << isNSimple << endl;*/
-
-    //10 Does the num have two digits
-    /*int N = 0;
-    cout << "N: ";
-    cin >> N;
-    int tmp = N;
-    int prev = -1;
-    int cur;
-    bool flag = false;
-    while (tmp && !flag) {
-        if (tmp != N) {
-            prev = cur;
-        }
-        cur = tmp % 10;
-        if (prev == cur && tmp != N) {
-            flag = true;
-        }
-        tmp /= 10;
-    }
-    if (flag) {
-        cout << "В этом числе две цифпы подряд одинаковы!" << endl;
+        cout << endl;
     }*/
 
-    //11
-    // ordered digits in num
-    /*int N;
-    cout << "N: " ;
+    //3
+    /*double N, M;
+    double const inf = 0.03;
+    int MONTHES = 10;
+    double need_sum = 0;
+    cout << "Stipendia: ";
     cin >> N;
-    int tmp = N;
-    int cur;
-    int prev = -1;
-    bool flag = true;
-    while (tmp && flag) {
-        if (tmp != N) {
-            prev = cur;
+    cout << "Need for first month: ";
+    cin >> M;
+    for (int i = 0; i < MONTHES; ++i) {
+        need_sum += M - N;
+        M += M * inf;
+    }
+    cout << "Give me: " << need_sum << " hrn" << endl;*/
+
+    //4
+    /*cout << "Rows: ";
+    int N;
+    cin >> N;
+    cout << "Cols: ";
+    int M;
+    cin >> M;
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < M; ++j) {
+            if (i == 0 || i == N - 1 || j == 0 || j == M - 1) {
+                cout << "*";
+            } else {
+                cout << " ";
+            }
+            cout << " ";
         }
-        cur = tmp % 10;
-        if (prev < cur && tmp != N) {
-            cout << "unordered digits\n" ;
-            flag = false;
+        cout << endl;
+    }*/
+
+    //5
+//    int h;
+//    cout << "h: ";
+//    cin >> h;
+//    int space = (2 * h - 1) / 2 + 1;
+//    for (int i = 1; i <= h; ++i, --space) {
+//        for (int j = 0; j < space; ++j) {
+//            cout << " ";
+//        }
+//        int len = 2 * i - 1;
+//        for (int k = 0; k < len; ++k) {
+//            cout << ((k == 0 || k == len - 1 || i == h) ? "*" : " ");
+//        }
+//
+//        cout << endl;
+//    }
+
+    //6
+//    int h;
+//    cout << "h: ";
+//    cin >> h;
+//    int len;
+//    int space = (2 * h - 1) / 2 + 1;
+//    for (int i = 1; i <= h; ++i, --space) {
+//        for (int j = 0; j < space; ++j) {
+//            cout << " ";
+//        }
+//        len = 2 * i - 1;
+//        for (int k = 0; k < len; ++k) {
+//            cout << ((k == 0 || k == len - 1) ? "*" : " ");
+//        }
+//        cout << endl;
+//    }
+//    space = 2;
+//    for (int i = 1; i < h; ++i, ++space) {
+//        for (int j = 0; j < space; ++j) {
+//            cout << " ";
+//        }
+//
+//        for (int k = (len - 2 * i); k > 0; --k) {
+//            cout << ((k == len - 2*i || k == 1) ? "*" : " ");
+//        }
+//        cout << endl;
+//    }
+
+    //7
+//    int N;
+//    cout << "N: ";
+//    cin >> N;
+//    int copyN = N;
+//    bool  palindrome = true;
+//    int exp = 1;
+//    while  (copyN > 10) {
+//        exp *= 10;
+//        copyN /= 10;
+//    }
+//
+//    copyN = N;
+//    int rest = N;
+//    while (copyN) {
+//        int left = rest / exp;
+//        int right = copyN % 10;
+//        if (left != right) {
+//            //cout << left << "\t" << right << endl;
+//            palindrome = false;
+//        }
+//        rest %= exp;
+//        exp /= 10;
+//        copyN /= 10;
+//    }
+//    cout << N << (palindrome ? " is palindrome" : "");
+//    cout << endl;
+
+//9
+    /*int A, B, C;
+    cout << "Input sizes of paralelepiped(axbxc): ";
+    cin >> A >> B >> C;
+    if (C < B) {
+        int tmp = C;
+        C = B;
+        B = tmp;
+    }
+    int const left_front = 1;
+    int const left_back = left_front + B - 1;
+    int const right_front = left_front + A - 1;
+    int const right_back= left_back + A - 1;
+    int const right_back_botom = C - B - 1;
+    char const brush = '*';
+    char const space = '.';
+
+
+    // draw top frame with top of right back altitude
+    for (int i = 0; i < B; ++i) {
+        for (int j = 0; j <= right_back; ++j) {
+            if (j == right_back) {
+                cout << brush;
+            }
+
+            else if (j >= left_back - i && j <= right_back - i) {
+                cout << brush;
+            }
+            else {
+                cout << space;
+            }
         }
-        tmp /= 10;
+        cout << endl;
+    }
+    // draw front projection and bottom of right back altitude
+    for (int i = 0; i < C - 1; ++i) {
+        for (int j = 0; j <= right_back; ++j) {
+            if (j == right_back) {
+                if (i <= right_back_botom)
+                    cout << brush;
+            }
+
+            else if (j >= left_front && j <= right_front) {
+                cout << brush;
+            }
+
+            else {
+                cout << space;
+            }
+        }
+        cout << endl;
+    }*/
+
+    //10
+    /*size_t LEFT = 2;
+    size_t RIGHT = 10000000;
+    for (size_t i = LEFT; i < RIGHT; ++i) {
+        size_t midle = i / 2;
+        bool simple = true;
+        for (size_t j = LEFT; j <=  midle; ++j) {
+            if (0 == i % j) {
+                simple = false;
+                break;
+            }
+        }
+        if (simple) {
+            cout << i << " ";
+        }
+    }
+    cout << endl;*/
+
+    //11
+    /*size_t const LEFT = 1;
+    size_t const RIGHT = 10000000;
+    for (size_t i = LEFT; i <= RIGHT; ++i) {
+        size_t sz = GetSize(i);
+        if (GetSumArmstrong(i, sz) == i) {
+            cout << i << endl;
+        }
     }*/
 
     //12
-    //CPU try to guess a number from 1 to 1000
     /*size_t const LEFT = 1;
-    size_t const RIGHT = 1000;
-    size_t secret = rand() % (RIGHT - LEFT) + LEFT;
-    bool flag = false;
-    const int TRIES = 10;
-    size_t left = LEFT;
-    size_t right = RIGHT;
-    for (size_t i = 0; !flag && i < TRIES; ++i) {
-        size_t midle = (left + right) / 2;
-        cout << i + 1 << ": " << midle << "\t";
-        if (midle == secret) {
-            cout << "\nYou have just guess number. Congratulations!!!\n" ;
-            flag = true;
+    size_t const RIGHT = 10000000;
+    size_t sum = 0;
+    for (size_t i = LEFT; sum < RIGHT; i++) {
+        sum += pow (2 * i - 1, 3.);
+        if (i == 1 ) {
+            cout << 6 << endl;
         }
-        else if (midle < secret) {
-            cout << "My number is graiter then this one\n";
-            left = midle + 1;
-        } else {
-            cout << "My number is less then this one\n";
-            right = midle - 1;
+        else if (GetSumPerfect(sum) == sum) {
+            cout << sum << endl;
         }
     }*/
 
     //13
-    //Lucky's tickets output
-    /*size_t const LEFT =  100000;
-    size_t const RIGHT = 999999;
+    /*size_t const RIGHT = 10000000;
+    size_t a = 1;
+    size_t b = 1;
+    size_t c = 1;
+    while (a < RIGHT) {
+        c = a + b;
+        cout << a << endl;
+        a = b;
+        b = c;
 
-    for (size_t i = LEFT, cnt = 0; i <= RIGHT; ++i) {
-        size_t l_sum = 0;
-        size_t r_sum = 0;
-        size_t tmp = i;
-        for (int j = 0; j < 6; ++j, tmp /= 10) {
-            size_t cur = tmp % 10;
-            if (j < 3) {
-                l_sum += cur;
-            }
-            else {
-                r_sum += cur;
-            }
-        }
-        if (l_sum == r_sum) {
-            cnt++;
-            if (cnt && cnt % 10 == 0) cout << endl;
-            cout << i << " " ;
-        }
-    }
-    cout << endl;*/
-
-    //14
-    //12345
-    /*long long const LEFT =  10000000;
-    long long const RIGHT = 99999999;
-    long long delim = 12345;
-    long long cnt = 0;
-    for (long long i = LEFT; i <= RIGHT; ++i) {
-        if (0 == i % delim) {
-            cout << i << endl;
-            ++cnt;
-        }
-    }
-    cout << "\tcnt: " << cnt << endl;*/
-
-    //15
-    // bynary oct hex
-    /*size_t const BYNARY = 2;
-    size_t const OCT = 8;
-    size_t const HEX = 16;
-    size_t num;
-    cout << "num: ";
-    cin >> num;
-    cout << num << "\t";
-    printDigits(num, BYNARY);
-    cout << "\t";
-    printDigits(num, OCT);
-    cout << "\t0x";
-    printDigits(num, HEX);
-    cout << endl;*/
-
-    //16
-    /*Реализовать игровую программу «Однорукий бандит»*/
-
-    /*int const SZ = 8;
-    int credits = 5000;
-    Threebits bandyt;
-    bool flagWin = false;
-     do {
-        bandyt.f = rand() % SZ;
-        bandyt.s = rand() % SZ;
-        bandyt.t = rand() % SZ;
-        evaluate(bandyt, credits);
-        displayBandit(bandyt);
-        currentPay(credits);
-        displayCredit(credits);
-        flagWin = isWin(bandyt);
-    } while (!flagWin && !isDefeat(credits));
-    if (flagWin) {
-        cout << "Congratulation!! You won jackpot!!)))\n";
-    }
-    else {
-        cout << "GAME OVER!\n";
     }*/
 
-    Dragon Smaug;
-    Pickman pickman;
-    int pickmans = 0;
-    cout << "Input dragons(hitpoint, demage): " ;
-    cin >> Smaug.hp >> Smaug.damage;
+    //14
+    /*cout << "Year: ";
+    int year;
+    cin >> year;
+    for (int i = 1; i <= 12; ++i) {
+        PrintMonth(i, year);
+        cout << endl << endl;
+    }*/
 
-    cout << "Input pickman(hitpoint, demage): " ;
-    cin >> pickman.hp >> pickman.damage;
-
-    cout << "how many pickmans you can by: ";
-    cin >> pickmans;
-
-    while (true) {
-        int pickmans_total_dmg = pickmans * pickman.damage;
-        int pickmans_total_hp = pickmans * pickman.hp;
-        Smaug.hp -= pickmans_total_dmg;
-        cout << "Копейщики атакуют(" << "урон "  << pickmans_total_dmg << ")"
-             << " - у дракона осталось " << Smaug.hp << " очков здоровья.\n";
-        if (!isAlive(Smaug)) {
-            cout << "Копейщики побеждают!!\n ";
-            break;
+    //15
+    /*int stairsLength;
+    int stairs;
+    cout << "Input length of stairs: ";
+    cin >> stairsLength;
+    cout << "how many stairs: ";
+    cin >> stairs;
+    cout << endl;
+    for (int i = 0; i < stairs; ++i) {
+        for (int k = 0; k < 2*i; ++k) {
+            cout << " ";
         }
-
-        pickmans_total_hp -= Smaug.damage;
-        if (pickmans_total_hp <= 0) {
-            cout << "Дракон побеждает.\n" ;
-            break;
-        }
-        pickmans = pickmans_total_hp / pickman.hp;
-        int injured = pickmans_total_hp % pickman.hp;
-        if (injured) {
-            ++pickmans;
-        }
-
-        if (pickmans == 0) {
-            cout << "Дракон побеждает.\n" ;
-            break;
-        }
-        cout << "Дракон атакует (урон " << Smaug.damage << ") – осталось "
-             << pickmans;
-        if (injured) {
-            cout << " копейщиков один из которых ранен (осталось " << injured << " очков здоровья).";
-        }
-        else {
-            cout << " копейщиков.";
+        for (int j = 0; j < stairsLength; ++j) {
+            cout << "*";
         }
         cout << endl;
+    }*/
+
+    //16
+    /*int const LENHGTH = 3;
+    int stairs;
+    cout << "stairs: ";
+    cin >> stairs;
+    for (int i = 0; i < stairs; ++i) {
+        for (int k = 0; k < i*LENHGTH - 1; ++k) {
+            cout << " ";
+        }
+        for (int j = 0; j < LENHGTH; ++j) {
+            cout << "*";
+        }
+        cout << endl;
+        for (int k = 0;
+        k < i*LENHGTH - 1 + LENHGTH - (i > 0) ? 1 : 0;
+        ++k) {
+            cout << " ";
+        }
+        cout << "*";
+        cout << endl;
+
+    }*/
+
+    //17
+    // int const SIZE = 11;
+    // //17.1
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //         || i == j
+    //         ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // // 17.2
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //             || i + j == SIZE - 1
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.3
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //             || j == SIZE / 2
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // // 17.4
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //             || i == SIZE / 2
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.5
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == j ||
+    //                 (i <= SIZE / 2 && j == 0) ||
+    //                 (i == 0 && j <= SIZE / 2) ||
+    //                 (i >= SIZE / 2 && j == SIZE - 1) ||
+    //                 (i == SIZE - 1 && j >= SIZE / 2)
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.6
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i+ j == SIZE - 1 ||
+    //             (i <= SIZE / 2 && j == SIZE - 1) ||
+    //             (i == 0 && j >= SIZE / 2) ||
+    //             (i >= SIZE / 2 && j == 0) ||
+    //             (i == SIZE - 1 && j <= SIZE / 2)
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.7
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //             || i == j
+    //             || i + j == SIZE - 1
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.8
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (j == 0 || j == SIZE - 1
+    //             || i == j
+    //             || i + j == SIZE - 1
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.9
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0  || i == SIZE - 1
+    //             || i == j
+    //             || i + j == SIZE - 1
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.10
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if (i == 0 || j == 0 || j == SIZE - 1 || i == SIZE - 1
+    //             || i == SIZE / 2
+    //             || j == SIZE / 2
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.11
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if ( ((i == 0 || i == SIZE / 2) && (j > 0 && j < SIZE /2))
+    //             || ((i > 0 && i < SIZE / 2) && (j == 0 || j == SIZE /2))
+    //             || ((i == SIZE / 2  || i == SIZE - 1) && (j > SIZE / 2 && j < SIZE - 1))
+    //             || ((i > SIZE / 2  && i < SIZE - 1 ) && (j == SIZE / 2 || j == SIZE - 1 ))
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // //17.12
+    // for (int i = 0; i < SIZE; ++i) {
+    //     for (int j = 0; j < SIZE; ++j) {
+    //         if ( ((i == 0 || i == SIZE / 2) && (j > SIZE / 2 && j < SIZE - 1))
+    //              || ((i > 0 && i < SIZE / 2) && (j == SIZE / 2 || j == SIZE - 1))
+    //              || ((i == SIZE / 2  || i == SIZE - 1) && (j > 0 && j < SIZE / 2))
+    //              || ((i > SIZE / 2  && i < SIZE - 1 ) && (j == 0 || j == SIZE / 2))
+    //                 ) {
+    //             cout << "*";
+    //         } else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    //18
+
+    // double h;
+    // cout << "H(>= 20): ";
+    // cin >> h;
+
+    // int length = 2 * round(h / 3) - 1;
+    // int h_roof = round(h / 3);
+    // int top_roof = round(h / 3);
+    // int thick_roof = round (h / 8);
+    // for (int i = 0; i <  h_roof; ++i) {
+    //     for (int j = 0; j < length; ++j) {
+    //         if (
+    //         (i + j == top_roof - 1) ||
+    //         (i + top_roof - 1 == j) ||
+    //         i == h_roof - 1 ||
+    //         ((i == 0 && (j > length / 2 && j < length / 2 + thick_roof))) ||
+    //         ((i > 0 && i < thick_roof) && (j == length / 2 + thick_roof - 1))
+    //         ) {
+    //             cout << "*";
+    //         }
+    //         else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // 
+    // int h_botom = round(h * 1.25 / 3);
+    // int h_win = h_botom / 2;
+    // int thick_win = length / 4;
+    // int thick_dor = thick_win;
+    // for (int i = 0; i < h_botom; ++i) {
+    //     for (int j = 0; j < length; ++j) {
+    //         if (
+    //         j == 0 ||
+    //         j == length - 1 ||
+    //         i == h_botom - 1 ||
+    //         ((i == h_botom / 6) && (j >= h_botom / 6 && j <= h_botom / 6 + thick_win)) ||
+    //         ((i == h_botom / 6 + h_win) && (j >= h_botom / 6 && j <= h_botom / 6 + thick_win)) ||
+    //         ((i > h_botom / 6 && i < h_botom / 6 + h_win) && (j == h_botom / 6)) ||
+    //         ((i > h_botom / 6 && i < h_botom / 6 + h_win) && (j == h_botom / 6 + thick_win)) ||
+    //         ((i == h_botom / 6) && (j < length - h_botom / 6 && j >= length - h_botom / 6 - thick_dor)) ||
+    //         ((i == h_botom - 2) && (j < length - h_botom / 6 && j >= length - h_botom / 6 - thick_dor)) ||
+    //         ((i > h_botom / 6 && i < h_botom - 2) && (j == length - h_botom / 6 - thick_dor)) ||
+    //         ((i > h_botom / 6 && i < h_botom - 2) && (j == length - h_botom / 6 - 1))
+    //         ) {
+    //             cout << "*";
+    //         }
+    //         else {
+    //             cout << " ";
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    //19
+    // int rows, h;
+    // cout << "Rows, H: ";
+    // cin >> rows >> h;
+    // cout << endl;
+    // int const spaces = 40;
+    // int const thick = 2;
+    // for (int i = 0; i < rows; ++i) {
+    //     for (int j = 0; j < h; ++j) {
+    //         for (int k = 0; k < spaces; ++k) {
+    //             if (k < spaces / 2 - j - i) {
+    //                 cout << "  ";
+    //             } 
+    //             else if (k <= spaces / 2 + j + i) {
+    //                 cout << "<>";
+    //             }
+    //         }
+    //         cout << endl;
+    //     }
+    // }
+    // for (int i = 0; i < 4; ++i) {
+    //     for (int j = 0; j < spaces; ++j) {
+    //         if (
+    //             j >= spaces / 2 - thick / 2 &&
+    //             j <= spaces / 2 + thick / 2
+    //             ) {
+    //                 cout << "<>";
+    //             }
+    //             else {
+    //                 cout << "  ";
+    //             }
+    //     }
+    //     cout << endl;
+    // }
+
+    //20
+
+    // cout << "Day : Month : Year : ";
+    // int day, month, year;
+    // cin >> day >> month >> year;
+    // int week_day = what_day({(char)day,(char) month, (short)year});
+    // switch (week_day) {
+    //     case 0:
+    //         cout << "Sunday";
+    //         break;
+
+    //     case 1:
+    //         cout << "Monday";
+    //         break;
+
+    //     case 2:
+    //         cout << "Tuesday";
+    //         break;  
+
+    //     case 3:
+    //         cout << "Wensday";
+    //         break;
+
+    //     case 4:
+    //         cout << "Thursnday";
+    //         break;
+
+    //     case 5:
+    //         cout << "Friday";
+    //         break;
+
+    //     case 6:
+    //         cout << "Saturday";
+    //         break;
+
+    //     default:
+    //         cout << "???";
+    //         break;
+    // }
+    // cout << endl;
+
+    //21
+
+    // int const LEFT = 1;
+    // int const RIGHT = 100000;
+    // int cnt = 0;
+    // for (int i = LEFT; i < RIGHT; ++i) {
+    //     if (IsThirteenIncludes(i) || IsFourIncludes(i)) {
+    //         cout << i << " ";
+    //         cnt++;
+    //         if (cnt % 10 == 0) {
+    //             cnt = 0;
+    //             cout << endl;
+    //         }
+    //     }
+    // }
+
+    stack<int> decimals;
+    int n;
+    cout << "n: ";
+    cin >> n;
+    while (n) {
+        decimals.push(n % 10);
+        n /= 10;
     }
+
+    while (!decimals.empty()) {
+        int tmp = decimals.top();
+        PrintDigit(tmp);
+        decimals.pop();
+    }
+
+    cout << endl;
+    
     return 0;
 }
 
-////////////////////////////////////////////////////////////////////////
-
-bool isAlive(Monster const &obj) {
-    return obj.hp > 0;
+size_t GetSumArmstrong(size_t n, size_t sz) {
+    size_t sum = 0;
+    while (n) {
+        sum += pow( n % 10, sz);
+        n /= 10;
+    }
+    return sum;
 }
 
-////////////////////////////////////////////////////////////////////////
-
-void printDigits(size_t n, size_t exp) {
-    if (n == 0) {
-        return;
+size_t GetSize(size_t i) {
+    size_t sz = 0;
+    while (i) {
+        i /= 10;
+        sz++;
     }
-    //cout << n % exp;
-    printDigits(n / exp, exp);
-    //cout << n % exp;
-    size_t cur = n % exp;
-    if (cur < 10) {
-        cout << cur;
+    return sz;
+}
+
+bool IsSimple(size_t n) {
+    for (size_t i = 2; i  <=  n / 2; ++i ) {
+        if (0 == n % i) return false;
+    }
+    return true;
+}
+
+size_t GetSumPerfect(size_t n) {
+    size_t sum = 1;
+    for (size_t i = 2; i < n; ++i) {
+        if (0 == n % i) {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+int what_day(struct struct_date const& date)
+{
+    int a = (14 - date.month) / 12;
+    int y = date.year - a;
+    int m = date.month + 12 * a - 2;
+    return (7000 + (date.day + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12)) % 7;
+}
+
+bool IsLeapYear(int year) {
+    if (year % 4) {
+        return false;
+    } else {
+        if (year % 100) {
+            return true;
+        }
+        else {
+            if (year % 400) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
+}
+
+int GetDaysFromMonth(int month, int year) {
+    if (month != 1 ) {
+        return month_days[month];
+    }
+    else  if (!IsLeapYear(year)){
+        return month_days[month];
     }
     else {
-        cout << (char) ('A' + cur - 10);
+        return month_days[month] + 1;
     }
 }
 
-///////////////////////////////////////////////////////////////////
-
-void displayCredit(int const &credits) {
-    cout << "Total credits: " << credits << endl;
-}
-
-void currentPay(int &credits) {
-    credits -= SIMPLE_PAY;
-}
-
-void evaluate(Threebits threebits, int & pInt) {
-    //pInt -= 100;
-    if (threebits.f == 0 && threebits.s == 0 && threebits.t == 0) {
-        pInt += 100;
+void PrintMonth(int month, int year) {
+    cout << "\t\t" << month_names[month] << endl << endl;
+    struct_date tmp;
+    tmp.day = 1;
+    tmp.month = month;
+    tmp.year = year;
+    int pos = what_day(tmp);
+    int days = GetDaysFromMonth(month, year);
+     cout << "Sun\t" << "Mon\t" << "Tue\t" << "Wen\t";
+     cout << "Thu\t" << "Fri\t" << "Sat\n";
+    for (int j = 0; j < pos; ++j) {
+        cout << "\t";
     }
-    else if (threebits.f == 1 && threebits.s == 1 && threebits.t == 1) {
-        pInt += 150;
-    }
-    else if (threebits.f == 2 && threebits.s == 2 && threebits.t == 2) {
-        pInt += 200;
-    }
-    else if (threebits.f == 3 && threebits.s == 3 && threebits.t == 3) {
-        pInt += 250;
-    }
-    else if (threebits.f == 4 && threebits.s == 4 && threebits.t == 4) {
-        pInt += 300;
-    }
-    else if (threebits.f == 5 && threebits.s == 5 && threebits.t == 5) {
-        pInt += 250;
-    }
-    else if (threebits.f == 7 && threebits.s == 7 && threebits.t == 7) {
-        pInt += 0;
-    }
-    else if (threebits.f == 7 && threebits.s == 7) {
-        pInt += 50;
-    }
-    else if (threebits.f == 7) {
-        pInt += 25;
-    }
-    else if (threebits.f == 5 && threebits.s == 5) {
-        pInt += 50;
-    }
-    else if (threebits.f == 5) {
-        pInt += 25;
-    }
-    else if (threebits.f == 6 && threebits.s == 6 && threebits.t == 6) {
-        pInt -= 1000;
+    for (int i = 1; i <= days; ++i) {
+        cout  << i;
+        cout << "\t";
+        if (pos == 6) {
+            cout << endl;
+        }
+        pos++;
+        pos %= 7;
     }
 }
 
-void displayBandit(Threebits const& threebits) {
-    cout << "\t" << threebits.f << " : " << threebits.s
-        << " : " << threebits.t << endl;
+bool IsFourIncludes(int n) {
+    while (n) {
+        if (n % 10 == 4) {
+            return true;
+        }
+        n /= 10;
+    }
+    return false;
 }
 
-bool isDefeat(int credits) {
-    //cout << "#credits : " << credits << endl;
-    return credits <= 0;
+bool IsThirteenIncludes(int n) {
+    bool flag = false;
+    while (n) {
+        int tmp = n % 10;
+        if (3 == tmp) {
+            flag = true;
+        }
+        else if (flag) {
+            if (1 == tmp) {
+                return true;
+            }
+            else {
+                flag = false;
+            }
+        }
+        n /= 10;
+    }
+    return false;
 }
 
-bool isWin(Threebits const& threebits) {
-    return threebits.f == 7 && threebits.s == 7 && threebits.t == 7;
-}
+void PrintDigit(int n) {
+    switch (n) {
+        case 0:
+        cout << "   ***  " << endl;
+        cout << "  *   * " << endl;
+        cout << "  *   * " << endl;
+        cout << "  *   * " << endl;
+        cout << "   ***  " << endl;
+        break;
+        
+        case 1:
+        cout << "    *   " << endl;
+        cout << "  * *   " << endl;
+        cout << "    *   " << endl;
+        cout << "    *   " << endl;
+        cout << "   ***  " << endl;
+        break;
+        
+        case 2:
+        cout << "   ***  " << endl;
+        cout << "  *   * " << endl;
+        cout << "     *  " << endl;
+        cout << "    *   " << endl;
+        cout << "   **** " << endl;
+        break;
+        
+        case 3:
+        cout << "   ***  " << endl;
+        cout << "  *   * " << endl;
+        cout << "    **  " << endl;
+        cout << "  *   * " << endl;
+        cout << "   ***  " << endl;
+        break;
 
-/////////////////////////////////////////////////////////////////
+        case 4:
+        cout << "  *  *  " << endl;
+        cout << "  *  *  " << endl;
+        cout << "  ****  " << endl;
+        cout << "     *  " << endl;
+        cout << "     *  " << endl;
+        break;
+
+        case 5:
+        cout << "  ****  " << endl;
+        cout << "  *     " << endl;
+        cout << "  ****  " << endl;
+        cout << "     *  " << endl;
+        cout << "  ****  " << endl;
+        break;
+
+        case 6:
+        cout << "  ****  " << endl;
+        cout << "  *     " << endl;
+        cout << "  ****  " << endl;
+        cout << "  *  *  " << endl;
+        cout << "  ****  " << endl;
+        break;
+
+        case 7:
+        cout << "  ****  " << endl;
+        cout << "    *   " << endl;
+        cout << "  *     " << endl;
+        cout << "  *     " << endl;
+        cout << "  *     " << endl;
+        break;
+
+        case 8:
+        cout << "  ****  " << endl;
+        cout << "  *  *  " << endl;
+        cout << "  ****  " << endl;
+        cout << "  *  *  " << endl;
+        cout << "  ****  " << endl;
+        break;
+
+        case 9:
+        cout << "  ****  " << endl;
+        cout << "  *  *  " << endl;
+        cout << "  ****  " << endl;
+        cout << "     *  " << endl;
+        cout << "  ****  " << endl;
+        break;
+
+        default:
+
+        break;
+    }
+}

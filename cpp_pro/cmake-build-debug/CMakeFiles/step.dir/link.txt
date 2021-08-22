@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -Wextra   CMakeFiles/step.dir/src/main.cpp.o  -o step -lncurses 

@@ -1,363 +1,446 @@
 #include <iostream>
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_1
-void PrintIntArray(int arr[], size_t const sz);
-void FillIntArray(int arr[], size_t const sz, int const left, int const right);
-size_t GetPlusCnt(int arr[], size_t const sz);
-size_t GetPlusSum(int arr[], size_t const sz);
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_2
-void FillCharArray(char arr[], size_t const sz, int const left, int const right);
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_4
-void FillDoubleArray(double arr[], size_t const sz, int const top, int const bottom);
-void PrintDoubleArray(double arr[], size_t const sz);
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_5
-void ReverseIntArray(int arr[], size_t const sz);
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_6
-typedef bool(*predicat)(int a);
-bool Pluse(int a);
-bool Zero(int a);
-bool Minuse(int a);
-void CopyIntArrayFromTo(int dest[], int const src[], size_t const src_sz, 
-	int& src_pos, int& dest_pos, predicat = Pluse);
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_7
-bool IsExistElemInIntArray(int const arr[], int elem, size_t const sz);
-///////////////////////////////////////////////////////////////////////////////////////
+#include <time.h>
+void PrintIntMatrix(int arr[], int row, int col);
+void FillIntMatrixRandomly(int arr[], int row, int col, int left_range = 0, int right_range = 100);
+void FillIntMatrixCounterClockWiseSpiral(int arr[], int sz);
+void FillIntMatrixFromTopLeftSpiral(int arr[], int sz);
+void FillIntMatrixSimpleOrder(int arr[],  size_t const row, size_t const col);
+void FillIntMatrixLikeSnake(int arr[],  size_t const row, size_t const col);
+void FillIntMatrixBallStrike(int arr[],  size_t const row, size_t const col);
+long long GetSumOfIntMatrix(int arr[], int row, int col);
+void GetIndexOfMin(int arr[], int row, int col, int& min_row, int& min_col);
+void GetIndexOfMax(int arr[], int row, int col, int& max_row, int& max_col);
 
 
 int main()
 {
 	using namespace std;
 	srand(time(0));
-	setlocale(LC_ALL, "Russian");
-	// 1 
-	/*size_t const SIZE = 10;
-	int const LEFT = -SIZE;
-	int const RIGHT = SIZE;
-	int arr[SIZE] { 0 };
-	FillIntArray(arr, SIZE, LEFT, RIGHT);
-	PrintIntArray(arr, SIZE);
-	size_t pluses = GetPlusCnt(arr, SIZE);
-	size_t sum = GetPlusSum(arr, SIZE);
-	cout << "pluses -> " << pluses << endl;
-	cout << "sum -> " << sum << endl;
-	cout << "aveeage -> " << (double) sum / pluses << endl;*/
+
+	//1
+	/*size_t const M = 2;
+	size_t const N = 5;
+	int const LEFT = 0;
+	int const RIGHT = 20;
+	int matrix[M][N] { {0} };
+	FillIntMatrixRandomly((int*)matrix, M, N, LEFT, RIGHT);
+	PrintIntMatrix((int*)matrix, M, N);
+	auto sum = GetSumOfIntMatrix((int*)matrix, M, N);
+	int row_min = 0;
+	int col_min = 0;
+	int row_max = 0;
+	int col_max = 0;
+	GetIndexOfMin((int*)matrix, M, N, row_min, col_min);
+	GetIndexOfMax((int*)matrix, M, N, row_max, col_max);
+	cout << "\tArray specification:" << endl;
+	cout << "sum\t" << sum << endl;
+	cout << "average\t" << (double)sum / (M * N) << endl;
+	cout << "min\t" << matrix[row_min][col_min] << endl;
+	cout << "max\t" << matrix[row_max][col_max] << endl;*/
 
 	//2
-	/*size_t const SIZE = 100;
-	char arr[SIZE + 1]{};
-	arr[SIZE] = '\0';
-	size_t digits = 0;
-	size_t alphas = 0;
-	size_t puncts = 0;
-	FillCharArray(arr, SIZE, 32, 175);
-	cout << arr << endl;
-
-	for (size_t i = 0; i < SIZE; i++)
-	{
-		if (isdigit(arr[i]))
-		{
-			digits++;
-		}
-		else if (isalpha(arr[i]))
-		{
-			alphas++;
-		}
-		else if (ispunct(arr[i]))
-		{
-			puncts++;
-		}
-	}
-	cout << "digits -> " << digits << endl;
-	cout << "alphas -> " << alphas << endl;
-	cout << "puncts -> " << puncts << endl;*/
-
-	//3
-	/*int const SIZE = 20;
+	/*size_t const M = 6;
+	size_t const N = 4;
 	int const LEFT = 0;
-	int const RIGHT = 100;
-	int arr[SIZE]{ 0 };
-	FillIntArray(arr, SIZE, LEFT, RIGHT);
-	PrintIntArray(arr, SIZE);
-	size_t min = 0;
-	size_t max = 0;
-	for (size_t i = 1; i < SIZE; i++)
-	{
-		if (arr[i] < arr[min])	min = i;
-		else if (arr[i] > arr[max])	max = i;
-	}
-	cout << "min[id=" << min << ", value=" << arr[min] << "]" << endl;
-	cout << "max[id=" << max << ", value=" << arr[max] << "]" << endl;*/
-
-	//4
-	/*size_t const SIZE = 100;
-	int const TOP = 23;
-	int const BOTTOM = 7;
-	double arr[SIZE]{ 0 };
-	FillDoubleArray(arr, SIZE, TOP, BOTTOM);
-	PrintDoubleArray(arr, SIZE);
-	int cnt_int = 0;
-	double error = 0.0001;
-	for (size_t i = 0; i < SIZE; i++)
-	{
-		if (arr[i] - (int)arr[i] <= error)
-		{
-			++cnt_int;
-		}
-	}
-	cout << "without real part -> " << cnt_int << endl;*/
-
-	//5
-	/*size_t const SIZE = 10;
-	int arr[SIZE]{ 0 };
-	FillIntArray(arr, SIZE, 0, 100);
-	PrintIntArray(arr, SIZE);
-	ReverseIntArray(arr, SIZE);
-	PrintIntArray(arr, SIZE);*/
-
-	//6
-	/*size_t const SIZE = 20;
-	int src[SIZE]{ 0 };
-	int dest[SIZE]{ 0 };
-	FillIntArray(src, SIZE, -10, 10);
-	PrintIntArray(src, SIZE);
-	int i_src = 0;
-	int j_dest = 0;
-	CopyIntArrayFromTo(dest, src, SIZE, i_src, j_dest, Pluse);
-	cout << "............................................\n";
-	PrintIntArray(dest, SIZE);
-	cout << "i_src = " << i_src << "\tj_dest = " << j_dest << endl;
-	
-	CopyIntArrayFromTo(dest, src, SIZE, i_src, j_dest, Zero);
-	cout << "............................................\n";
-	PrintIntArray(dest, SIZE);
-	cout << "i_src = " << i_src << "\tj_dest = " << j_dest << endl;
-	
-	CopyIntArrayFromTo(dest, src, SIZE, i_src, j_dest, Minuse);
-	cout << "............................................\n";
-	PrintIntArray(dest, SIZE);
-	cout << "i_src = " << i_src << "\tj_dest = " << j_dest << endl;*/
-
-	//7
-	/*size_t const N = 10;
-	size_t const M = 15;
-	int A[N] { 0 };
-	int B[M] { 0 };
-	int C[N] { 0 };
-	FillIntArray(A, N, -10, 10);
-	PrintIntArray(A, N);
-	
-	FillIntArray(B, M, -5, 10);
-	PrintIntArray(B, M);
-
-	int cnt = 0;
-	for (size_t i = 0; i < N; i++)
-	{
-		auto elem = A[i];
-		if (!IsExistElemInIntArray(B, elem, M)) continue;
-		if (!IsExistElemInIntArray(C, elem, N))	C[cnt++] = elem;
-	}
-
-	cout << "....................................................\n";
-	PrintIntArray(C, cnt);*/
-
-	//8
-	size_t const SZ = 20;
-	int const LEFT = -10;
 	int const RIGHT = 20;
-	int A[SZ] {0};
-	FillIntArray(A, SZ, LEFT, RIGHT);
-	PrintIntArray(A, SZ);
-	//bool flag = true;
-	size_t cnt = 0;
-	size_t max = 0;
-	size_t max_id = -1;
-	for (size_t i = 0; i < SZ; i++)
+	int matrix[M][N]{ {0} };
+	FillIntMatrixRandomly((int*)matrix, M, N, LEFT, RIGHT);
+	PrintIntMatrix((int*)matrix, M, N);
+	for (size_t i = 0; i < M - 1; i += 2)
 	{
-		if (A[i] > 0)
+		for (size_t j = 0; j < N; j++)
 		{
-			cnt++;
-			if (i == SZ - 1)
-			{
-				if (cnt > max)
-				{
-					max_id = i - cnt + 1;
-					max = cnt;
-				}
-			}		
-		} 
-		else if (A[i] <= 0)
-		{
-			if (cnt)
-			{
-				if (cnt > max)
-				{
-					max_id = i - cnt;
-					max = cnt;
-				}
-			}
-			cnt = 0;
+			auto tmp = matrix[i][j];
+			matrix[i][j] = matrix[i + 1][j];
+			matrix[i + 1][j] = tmp;
 		}
-	}
-	cout << "#max=" << max << "\tmax_id=" << max_id << "\t" << A[max_id] << endl;
-	for (size_t i = 0; i < max; i++)
-	{
-		cout << A[max_id + i] << " ";
 	}
 	cout << endl;
+	PrintIntMatrix((int*)matrix, M, N);*/
+
+	//3
+	/*size_t const M = 4;
+	size_t const N = 5;
+	int const LEFT = -100;
+	int const RIGHT = 100;
+	int matrix[M][N]{ {0} };
+	FillIntMatrixRandomly((int*)matrix, M, N, LEFT, RIGHT);
+	PrintIntMatrix((int*)matrix, M, N);
+	int row_min = 0;
+	int col_min = 0;
+	int row_max = 0;
+	int col_max = 0;
+	GetIndexOfMin((int*)matrix, M, N, row_min, col_min);
+	GetIndexOfMax((int*)matrix, M, N, row_max, col_max);
+
+	int firstId = row_min * N + col_min;
+	int secondtId = row_max * N + col_max;
+	if (firstId > secondtId)
+	{
+		auto tmp = firstId;
+		firstId = secondtId;
+		secondtId = tmp;
+	}
+	cout << "#first =" << firstId << "\t#second=" << secondtId << endl;
+	int sum = 0;
+	for (size_t i = firstId + 1; i < secondtId; i++)
+	{
+		cout << matrix[i / N][i % N] << " ";
+		sum += matrix[i / N][i % N];
+	}
+	cout << endl;
+	cout << "\tsum=" << sum << endl;*/
+
+	//4
+	// size_t const N = 7;
+	// int matrix[N][N]{ {0} };
+	// FillIntMatrixCounterClockWiseSpiral((int*)matrix, N);
+	// cout << endl;
+	// PrintIntMatrix((int*)matrix, N, N);
+
+	//5
+	// size_t const N = 3;
+	// int matrix[N][N]{ {0} };
+	// FillIntMatrixFromTopLeftSpiral((int*)matrix, N);
+	// cout << endl;
+	// PrintIntMatrix((int*)matrix, N, N);
+
+	//6
+	// size_t const M = 4;
+	// size_t const N = 6;
+	// int matrix[M][N]{ {0} };
+	// FillIntMatrixSimpleOrder((int*)matrix, M, N);
+	// PrintIntMatrix((int*)matrix, M, N);
+
+	//7
+	// size_t const M = 5;
+	// size_t const N = 6;
+	// int matrix[M][N]{ {0} };
+	// FillIntMatrixLikeSnake((int*)matrix, M, N);
+	// PrintIntMatrix((int*)matrix, M, N);
+
+	//8
+	size_t const M = 6;
+	size_t const N = 10;
+	int matrix[M][N]{ {0} };
+	//FillIntMatrixLikeSnake((int*)matrix, M, N);
+	FillIntMatrixBallStrike((int*)matrix, M, N);
+	PrintIntMatrix((int*)matrix, M, N);
 	return 0;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_1
-void PrintIntArray(int arr[], size_t const sz)
+void PrintIntMatrix(int arr[], int row, int col)
 {
 	using namespace std;
-	for (size_t i = 0; i < sz; i++)
+	for (size_t i = 0; i < row; i++)
 	{
-		cout << arr[i] << " ";
-		if (0 == (i + 1) % 10)	cout << endl;
-	}
-	cout << endl;
-}
-
-void FillIntArray(int arr[], size_t const sz, int const left, int const right)
-{
-	for (size_t i = 0; i < sz; i++)
-	{
-		arr[i] = left + rand() % (right - left + 1);
+		for (size_t j = 0; j < col; j++)
+		{
+			cout << arr[i*col + j] << "\t";
+		}
+		cout << endl;
 	}
 }
 
-size_t GetPlusCnt(int arr[], size_t const sz)
+void FillIntMatrixRandomly(int arr[], int row, int col, int left_range, int right_range)
 {
-	size_t cnt = 0;
-	for (size_t i = 0; i < sz; i++)
+	using namespace std;
+	for (size_t i = 0; i < row; i++)
 	{
-		if (arr[i] > 0) ++cnt;
+		for (size_t j = 0; j < col; j++)
+		{
+			arr[i * col + j] = left_range + rand() % (right_range - left_range + 1);
+		}
 	}
-	return cnt;
 }
 
-size_t GetPlusSum(int arr[], size_t const sz)
+long long GetSumOfIntMatrix(int arr[], int row, int col)
 {
-	size_t sum = 0;
-	for (size_t i = 0; i < sz; i++)
+	long long sum{ 0 };
+	for (size_t i = 0; i < row; i++)
 	{
-		if (arr[i] > 0) sum += arr[i];
+		for (size_t j = 0; j < col; j++)
+		{
+			sum += arr[i * col + j];
+		}
 	}
 	return sum;
 }
-///////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_2
-void FillCharArray(char arr[], size_t const sz, int const left, int const right)
+void GetIndexOfMin(int arr[], int row, int col, int& min_row, int& min_col)
 {
-	for (size_t i = 0; i < sz; i++)
+	min_row = min_col = 0;
+	for (size_t i = 0; i < row; i++)
 	{
-		arr[i] = left + rand() % (right - left + 1);
-	}
-}
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_4
-void FillDoubleArray(double arr[], size_t const sz, int const top, int const bottom)
-{
-	for (size_t i = 0; i < sz; i++)
-	{
-		arr[i] = (double) ( rand() % top ) / ( rand() % bottom + 1);
+		for (size_t j = 0; j < col; j++)
+		{
+			if (arr[i * col + j] < arr[min_row * col + min_col])
+			{
+				min_row = i;
+				min_col = j;
+			}
+		}
 	}
 }
 
-void PrintDoubleArray(double arr[], size_t const sz)
+void GetIndexOfMax(int arr[], int row, int col, int& max_row, int& max_col)
+{
+	max_row = max_col = 0;
+	for (size_t i = 0; i < row; i++)
+	{
+		for (size_t j = 0; j < col; j++)
+		{
+			if (arr[i * col + j] > arr[max_row * col + max_col])
+			{
+				max_row = i;
+				max_col = j;
+			}
+		}
+	}
+}
+
+void FillIntMatrixCounterClockWiseSpiral(int arr[], int sz)
+{
+	int cnt = 1;
+	int row = (sz % 2) ? sz / 2 : (sz - 1) / 2;
+	int col = sz / 2;
+	int len = 1;
+	arr[row * sz + col] = cnt;
+	int cnts = sz * sz;
+
+	while (true)
+	{
+		//left
+		for (size_t i = 0; i < len; i++)
+		{
+			if (cnt == cnts) break;
+			arr[row * sz + --col] = ++cnt;
+		}
+		//check end
+		if (cnt >= cnts)	break;
+
+		//down
+		for (size_t i = 0; i < len; i++)
+		{
+			if (cnt == cnts) break;
+			arr[++row * sz + col] = ++cnt;
+		}
+		len++;
+		//check end
+		if (cnt >= cnts)	break;
+
+		//right
+		for (size_t i = 0; i < len; i++)
+		{
+			if (cnt == cnts) break;
+			arr[row * sz + ++col] = ++cnt;
+		}
+		//check end
+		if (cnt >= cnts)	break;
+
+		//up
+		for (size_t i = 0; i < len; i++)
+		{
+			if (cnt == cnts) break;
+			arr[--row * sz + col] = ++cnt;
+		}
+		len++;
+		//check end
+		if (cnt >= cnts)	break;
+	}
+}
+
+void FillIntMatrixFromTopLeftSpiral(int arr[], int sz)
+{
+	int row = 0;
+	int col = 0;
+	int dx = 1;
+	int dy = 0;
+	//arr[row * sz + col] = cnt;
+	int cnts = sz * sz;
+
+	for (size_t i = 0; i < cnts; i++)
+	{                            
+		arr[row * sz + col] = i + 1;
+		//change from right to down
+		if (dx == 1 && (col == sz - 1 || arr[row * sz + col + 1]))
+		{
+			dx = 0;
+			dy = 1;
+			//break;
+		}
+		//change from down to left
+		else if (dy == 1 && (row == sz - 1 || arr[(row + 1) * sz + col]))
+		{
+			dx = -1;
+			dy = 0;
+			//break;
+		}
+		//change from left to up
+		else if (dx == -1 && (col == 0 || arr[row * sz + col - 1]))
+		{
+			dx = 0;
+			dy = -1;
+			//break;
+		}//change from up to right
+		else if (dy == -1 && (row == 0 || arr[(row - 1) * sz + col]))
+		{
+			dx = 1;
+			dy = 0;
+			//break;
+		}
+		row += dy;
+		col += dx;
+	}
+}
+
+void FillIntMatrixSimpleOrder(int arr[], size_t const row, size_t const col)
+{
+	for (size_t i = 0; i < row; ++i)
+	{
+		for (size_t j = 0; j < col; ++j)
+		{
+			arr[i * col + j] = i * col + j + 1;
+		}
+	}
+}
+
+void FillIntMatrixLikeSnake(int arr[],  size_t const row, size_t const col)
+{
+	for (size_t i = 0, k = 1; i < row; ++i)
+	{
+		if ( 0 == i % 2 )
+		{
+			for (size_t j = 0; j < col; ++j, ++k)
+			{
+				arr[i * col + j] = k;
+			}
+		}
+		else
+		{
+			for (int j = col - 1; j >= 0; --j, ++k)
+			{
+				arr[i * col + j] = k;
+			}
+		}
+	}
+}
+
+
+
+void FillIntMatrixBallStrike(int arr[],  size_t const row, size_t const col)
 {
 	using namespace std;
-	for (size_t i = 0; i < sz; i++)
-	{
-		cout << arr[i] << " ";
-		if (0 == (i + 1) % 10)	cout << endl;
-	}
-	cout << endl;
-}
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_5
-void ReverseIntArray(int arr[], size_t const sz)
-{
-	for (size_t i = 0; i < sz / 2; i++)
-	{
-		auto tmp = arr[i];
-		arr[i] = arr[sz - 1 - i];
-		arr[sz - 1 - i] = tmp;
-	}
-}
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_6
-bool Pluse(int a)
-{
-	return a > 0;
-}
-
-bool Zero(int a)
-{
-	return a == 0;
-}
-
-bool Minuse(int a)
-{
-	return a < 0;
-}
-
-void CopyIntArrayFromTo(int dest[], int const src[], 
-	size_t const src_sz, int& src_pos, int& dest_pos, predicat pre)
-{
-	bool flag = true;
-	for (int i = src_pos; i < src_sz; ++i)
-	{
-		if (pre(src[i]))
+	int r = 0;
+	int c = 0;
+	int dx = 1;
+	int dy = 1;
+	int cnt = 0;
+	arr[r * col + c] = cnt;
+	int cnts = row * col;
+	for (size_t i = 0; i < cnts;)
+	{   
+		if (arr[r * col + c] == 0) 
 		{
-			dest[dest_pos++] = src[i];
-		}
-		else if (flag)
+			arr[r * col + c] = ++i;
+		}  
+		                  
+		if (dx == 1 && dy == 1)
 		{
-			src_pos = i;
-			flag = false;
+			if (r == row - 1 && c == col - 1)
+			{
+				//check left bottom corner
+				if (arr[(row - 1) * col + 0] == 0)
+				{
+					dx = 1;
+					dy = -1;
+					r = row - 1;
+					c = 0;
+					continue;
+				}
+				else if (arr[0 * col + col] == 0)
+				{
+					dx = -1;
+					dy = 1;
+					r = 0;
+					c = col - 1;
+					continue;
+				}
+				//break;
+			}
+			else if (r == row - 1)
+			{
+				dy = -1;
+				//break;
+			}
+			else if (c == col - 1)
+			{
+				dx = -1;
+				//break;
+			}
 		}
+		else if (dx == 1 && dy == -1)
+		{
+			if (r == 0 && c == col - 1)
+			{
+				//check right bottom
+				if (arr[(row - 1) * col + col] == 0)
+				{
+					dx = -1;
+					dy = -1;
+					r = row - 1;
+					c = col - 1;
+					continue;
+				}
+				//check left bottom
+				else if (arr[(row - 1) * col + 0] == 0)
+				{
+					dx = 1;
+					dy = -1;
+					r = row - 1;
+					c = 0;
+					continue;
+				}
+			}
+			else if (r == 0)
+			{
+				dy = 1;
+				//break;
+			}
+			else if (c == col - 1)
+			{
+				dx = -1;
+				//break;
+			}
+		}
+		else if (dx == -1 && dy == -1)
+		{
+			if (r == 0)
+			{
+				dy = 1;
+				//break;
+			}
+			else if (c == 0)
+			{
+				dx = 1;
+				//break;
+			}
+		}
+		else if (dx == -1 && dy == 1)
+		{
+			if (r == row - 1)
+			{
+				dy = -1;
+				//break;
+			}
+			else if (c == 0)
+			{
+				dx = 1;
+				//break;
+			}
+		}
+
+		r += dy;
+		c += dx;
 	}
 }
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// functions for task_7
-bool IsExistElemInIntArray(int const arr[], int elem, size_t const sz)
-{
-	bool find = false;
-	for (size_t i = 0; i < sz; i++)
-	{
-		if (arr[i] == elem)	return true;
-	}
-	return find;
-}
-///////////////////////////////////////////////////////////////////////////////////////
-
-

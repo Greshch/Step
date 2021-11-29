@@ -5,4 +5,4 @@ project(step)
 set(CMAKE_CXX_STANDARD 14)
 include_directories(include)
 
-add_executable(step src/main.cpp src/my_array.cpp)
+add_executable(step src/main.cpp  src/guitar.cpp src/valisa.cpp src/panzer.cpp src/window.cpp src/laptop.cpp)

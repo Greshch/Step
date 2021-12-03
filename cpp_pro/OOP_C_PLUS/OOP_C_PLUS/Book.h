@@ -25,7 +25,7 @@ public:
 	~Book();
 
 private:
-	int const LEN = 80;
+	int const LEN = 40;
 	void Init();
 };
 

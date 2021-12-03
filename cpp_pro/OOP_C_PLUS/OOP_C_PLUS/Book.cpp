@@ -40,17 +40,17 @@ int Book::GetPages(char const*)
 
 void Book::SetTitle(char const* title_)
 {
-    strcpy_s(this->title, LEN, title_);
+    strcpy_s(this->title, strlen(title_) + 1, title_);
 }
 
 void Book::SetAuthor(char const* author_)
 {
-    strcpy_s(this->author, LEN, author_);
+    strcpy_s(this->author, strlen(author_) + 1, author_);
 }
 
 void Book::SetGanre(char const* ganre_)
 {
-    strcpy_s(this->ganre, LEN, ganre_);
+    strcpy_s(this->ganre, strlen(ganre_) + 1, ganre_);
 }
 
 void Book::SetPages(int pages_)

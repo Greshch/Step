@@ -1,5 +1,6 @@
 #include "Screen.h"
 #include <cstring>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -46,7 +47,7 @@ int Screen::GetFrequency() const
 	return frequency;
 }
 
-char const* Screen::GetName() const
+const string Screen::GetName() const
 {
 	return name;
 }

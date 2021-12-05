@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+using std::string;
+
 class Screen
 {
 private:
@@ -16,7 +19,7 @@ public:
 	int GetLength() const;
 	int GetWidth() const;
 	int GetFrequency() const;
-	char const* GetName() const;
+	const string GetName() const;
 	void Print() const;
 	~Screen();
 };

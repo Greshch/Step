@@ -28,22 +28,25 @@ int main()
 	some_book.Print();
 	kobzar.Print();*/
 	//////////////////////////////////////////
-	/*Screen samsung(640, 480, 70, "samsung screen", 1200);
+	Screen samsung(640, 480, 70, "samsung screen", 1200);
 	Screen lg;
 	samsung.Print();
-	lg.Print();*/
+	lg.Print();
 	//////////////////////////////////////////
 	/*Shape shape1(10, 25, 5, 100, Shape::Colors::RED);
 	Shape shape2(12, 20, 15, 250, Shape::Colors::BLUE);
 	cout << shape1.GetVolume() << endl;
 	cout << shape2.GetVolume() << endl;*/
 	//////////////////////////////////////////
-	Person vasyl("Vasyl", "Poterijko", 120, 200, 32);
+	/*Person vasyl("Vasyl", "Poterijko", 120, 200, 32);
 	Person masha("Maria", "Dudka", 82, 186, 28);
 	vasyl.PrintPasportDate();
 	vasyl.PrintApireance();
-
 	masha.PrintPasportDate();
-	masha.PrintApireance();
+	masha.PrintApireance();*/
+
+	//////////////////////////////////////////
+	
+	//////////////////////////////////////////
 	return 0;
 }

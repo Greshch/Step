@@ -139,19 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Book.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Person.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Book.h" />
-    <ClInclude Include="Person.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Screen.h" />
-    <ClInclude Include="Stack.h" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

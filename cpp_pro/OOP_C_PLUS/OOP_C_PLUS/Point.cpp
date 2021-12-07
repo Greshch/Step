@@ -1,4 +1,6 @@
 #include "Point.h"
+#include <iostream>
+using namespace std;
 
 Point::Point() : Point(0, 0)
 {
@@ -35,9 +37,16 @@ int Point::GetY() const
 Point& Point::MoveToX(int x)
 {
     _x += x;
+    return *this;
 }
 
 Point& Point::MoveToY(int y)
 {
     _y += y;
+    return *this;
+}
+
+void Point::Print() const
+{
+    cout << "(x=" << _x << ", y=" << _y << ")" << endl;
 }

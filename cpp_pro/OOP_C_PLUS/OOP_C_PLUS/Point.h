@@ -14,5 +14,6 @@ public:
 	int GetY() const;
 	Point& MoveToX(int x);
 	Point& MoveToY(int y);
+	void Print() const;
 };
 

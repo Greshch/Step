@@ -1,8 +1,8 @@
-#include <iostream>
-#include <Windows.h>
+#include "Header.h"
 #include "Point.h"
 #include "Counter.h"
 #include "Fraction.h"
+#include "Student.h"
 
 using namespace std;
 
@@ -30,16 +30,30 @@ int main()
 	//	//c.IncrByStep();
 	//}
 	///////////////////////////////////////////////
-	Fraction a(1, 2), b(1, 4);
+	/*Fraction a(1, 2), b(1, 4);
 	a.Print();
 	a.Add(b);
 	a.Print();
 	Fraction tmp(5.75);
+	tmp.Print();*/
+	///////////////////////////////////////////////
+	Student tmp;
+	tmp.SetName("Jury").
+		SetFathersName("Igorievich").
+		SetSurname("Karataev").
+		SetPhone("096-84-20-183").
+		SetBirth({2, 8, 1995})
+		;
 	tmp.Print();
+	tmp.WriteExams({ Student::Subjects::CPP, 8 }).
+		WriteCourses({ Student::Subjects::CPP, 10 }).
+		WriteConditions({ Student::Subjects::UML, 9 })
+		;
 
-		
-	
-	
+	cout << tmp.GetPhone() << endl;
+	tmp.PrintExams();
+	tmp.PrintCurseWorks();
+	tmp.PrintConditions();
 	///////////////////////////////////////////////
 	return 0;
 }

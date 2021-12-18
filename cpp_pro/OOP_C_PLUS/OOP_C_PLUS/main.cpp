@@ -37,7 +37,7 @@ int main()
 	Fraction tmp(5.75);
 	tmp.Print();*/
 	///////////////////////////////////////////////
-	Student tmp;
+	/*Student tmp;
 	tmp.SetName("Jury").
 		SetFathersName("Igorievich").
 		SetSurname("Karataev").
@@ -53,7 +53,9 @@ int main()
 	cout << tmp.GetPhone() << endl;
 	tmp.PrintExams();
 	tmp.PrintCurseWorks();
-	tmp.PrintConditions();
+	tmp.PrintConditions();*/
+	///////////////////////////////////////////////
+	
 	///////////////////////////////////////////////
 	return 0;
 }

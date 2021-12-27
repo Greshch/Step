@@ -1,10 +1,17 @@
 #pragma once
+
+typedef bool (*comparisonFcn)(int, int);
+
+
+
 class Sorter
 {
 public:
-	static void BubleSort(int* arr, int size);
-	static void InsertSort(int* arr, int size);
-	static void SelectSort(int* arr, int size);
-	static void QuickSortSort(int* arr, int size);
+	static bool Greater(int a, int b);
+	static bool Lower(int a, int b);
+	static void BubleSort(int* arr, int size, comparisonFcn = Greater);
+	static void InsertSort(int* arr, int size, comparisonFcn = Greater);
+	static void SelectSort(int* arr, int size, comparisonFcn = Greater);
+	static void QuickSortSort(int* arr, int left, int right, comparisonFcn = Greater);
 };
 

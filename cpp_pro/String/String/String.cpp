@@ -123,14 +123,69 @@ const char* String::GetCharArray() const
 	return _str;
 }
 
-int String::CompareTo(String s)
+int String::CompareTo(String const& obj)
 {
-	return CompareTo(s._str);
+	return strcmp(_str, obj._str);
 }
 
 int String::CompareTo(char* str)
 {
 	return strcmp(str, _str);
+}
+
+int String::IndexOf(char ch)
+{
+	return IndexOf(ch, 0);
+}
+
+int String::LastIndexOf(char ch)
+{
+	int len = strlen(_str);
+	for (int i = len - 1; i >= 0; i--)
+	{
+		if (_str[i] == ch)
+			return i;
+	}
+	return -1;
+}
+
+int String::IndexOf(String const& obj)
+{
+	return IndexOf(obj._str);
+}
+
+int String::IndexOf(char const* str)
+{
+	char ch = str[0];
+	int i = 0;
+	int res = 0;
+	while (true)
+	{
+		i = IndexOf(ch, i);
+		if (i == -1)
+			return -1;
+		res = FromIndexContainsStr(str, i);
+		if ( res )
+			return i;
+		i++;
+	}
+}
+
+int String::IndexOf(char ch, int id)
+{
+	int len = strlen(_str);
+	for (int i = id; i < len; i++)
+	{
+		if (_str[i] == ch)
+			return i;
+	}
+	return -1;
+}
+
+
+bool String::Contains(String const& obj)
+{
+	return IndexOf(obj._str) != -1;
 }
 
 String::~String()
@@ -260,4 +315,18 @@ unsigned String::TruncRightNulls(unsigned num)
 		}
 	}
 	return num;
+}
+
+bool String::FromIndexContainsStr(char const* str, int id)
+{
+	int length = strlen(_str);
+	int len_str = strlen(str);
+	for (int i = 0; i < len_str; i++)
+	{
+		if (i + id >= length || _str[i + id] != str[i])
+		{
+			return false;
+		}
+	}
+	return true;
 }

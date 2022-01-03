@@ -37,9 +37,32 @@ int main()
 		//s.PrintLn();
 		
 		//Test Concat(double)
-		String s = "test ";
+		/*String s = "test ";
 		s.Concat(-123.456);
+		s.PrintLn();*/
+
+		// Test IndexOf(char)
+		/*String s = "God bless you!";
 		s.PrintLn();
+		cout << "i -> " << s.IndexOf('i') << endl;
+		cout << "o -> " << s.IndexOf('o') << endl;*/
+
+		// Test LastIndexOf(char)
+		/*String s = "God bless you!";
+		s.PrintLn();
+		cout << "i -> " << s.LastIndexOf('i') << endl;
+		cout << "o -> " << s.LastIndexOf('o') << endl;*/
+
+		//Test IndexOf(char const*)
+		/*String str = "test one two three";
+		str.PrintLn();
+		cout << str.IndexOf("one") << endl;*/
+
+		//Test Contains(char const*)
+		/*String str = "test one two three";
+		str.PrintLn();
+		cout << str.Contains("one") << endl;*/
+		
 	}
 	catch (char const* exc)
 	{

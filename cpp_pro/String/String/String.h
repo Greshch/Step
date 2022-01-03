@@ -12,6 +12,7 @@ public:
 	String(const char* str);
 	explicit String(unsigned capacity);
 	String(String const&);
+	//////////////////////////////////////
 	void Print() const;
 	void PrintLn() const;
 	char GetCharAt(unsigned int index) const;
@@ -22,8 +23,17 @@ public:
 	void Concat(char const*);
 	void Concat(double);
 	const char* GetCharArray() const;
-	int CompareTo(String);
+	int CompareTo(String const&);
 	int CompareTo(char*);
+	///////////////////////////////////
+	int IndexOf(char);
+	int IndexOf(char, int);
+	int LastIndexOf(char);
+	int IndexOf(String const&);
+	int IndexOf(char const*);
+	bool Contains(String const&);
+
+	///////////////////////////////////
 	~String();
 
 	
@@ -36,5 +46,7 @@ private:
 	unsigned GetSizeOfNum(unsigned num);
 	unsigned GetSizeOfDouble(double d);
 	unsigned TruncRightNulls(unsigned num);
+
+	bool FromIndexContainsStr(char const*, int);
 };
 

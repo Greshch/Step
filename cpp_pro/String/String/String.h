@@ -29,6 +29,9 @@ public:
 	int IndexOf(char);
 	int IndexOf(char, int);
 	int LastIndexOf(char);
+	int LastIndexOf(char, int);
+	int LastIndexOf(String const&);
+	int LastIndexOf(char const*);
 	int IndexOf(String const&);
 	int IndexOf(char const*);
 	bool Contains(String const&);

@@ -140,13 +140,42 @@ int String::IndexOf(char ch)
 
 int String::LastIndexOf(char ch)
 {
-	int len = strlen(_str);
-	for (int i = len - 1; i >= 0; i--)
+	int len = strlen(_str) - 1;
+	return LastIndexOf(ch, len);
+}
+
+int String::LastIndexOf(char ch, int id)
+{
+	if (id < 0 || id >= strlen(_str))
+		return -1;
+	for (int i = id; i >= 0; i--)
 	{
 		if (_str[i] == ch)
 			return i;
 	}
 	return -1;
+}
+
+int String::LastIndexOf(String const& obj)
+{
+	return LastIndexOf(obj._str);
+}
+
+int String::LastIndexOf(char const* str)
+{
+	char ch = str[0];
+	int i = strlen(_str) - 1;
+	int res = 0;
+	while (true)
+	{
+		i = LastIndexOf(ch, i);
+		if (i == -1)
+			return -1;
+		res = FromIndexContainsStr(str, i);
+		if (res)
+			return i;
+		i--;
+	}
 }
 
 int String::IndexOf(String const& obj)

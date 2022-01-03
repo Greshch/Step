@@ -62,7 +62,16 @@ int main()
 		/*String str = "test one two three";
 		str.PrintLn();
 		cout << str.Contains("one") << endl;*/
+
+		//Test LastIndexOf(char)
+		/*String str = "test one two three";
+		str.PrintLn();
+		cout << str.LastIndexOf('t') << endl;*/
 		
+		//Test LastIndexOf(char const*)
+		String str = "one two zero";
+		str.PrintLn();
+		cout << str.LastIndexOf("one") << endl;
 	}
 	catch (char const* exc)
 	{

@@ -69,9 +69,21 @@ int main()
 		cout << str.LastIndexOf('t') << endl;*/
 		
 		//Test LastIndexOf(char const*)
-		String str = "one two zero";
+		/*String str = "one two zero";
 		str.PrintLn();
-		cout << str.LastIndexOf("one") << endl;
+		cout << str.LastIndexOf("one") << endl;*/
+
+		// Test Remove(int)
+		/*String str = "one two zero";
+		str.PrintLn();
+		str.Remove(5);
+		str.PrintLn();*/
+
+		// Test Remove(int)
+		/*String str = "onetwozero";
+		str.PrintLn();
+		str.Remove(2, 5);
+		str.PrintLn();*/
 	}
 	catch (char const* exc)
 	{

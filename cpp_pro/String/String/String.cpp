@@ -217,6 +217,41 @@ bool String::Contains(String const& obj)
 	return IndexOf(obj._str) != -1;
 }
 
+void String::Remove(int index)
+{
+	int len = strlen(_str);
+	if (index < 0 || index >= len)
+		return;
+	_str[index] = '\0';
+}
+
+void String::Remove(int start, int count)
+{
+	int len = strlen(_str);
+	if (start < 0)
+		return;
+
+	if (start + count > len)
+	{
+		Remove(start);
+		return;
+	}
+		
+
+	for (int i = 0; i < count; i++)
+	{
+		_str[start + i] = '\0';
+	}
+
+	len = len - start;
+	int i = start;
+	for (; i < len; i++)
+	{
+		_str[i] = _str[i + count];
+	}
+	_str[i] = '\0';
+}
+
 String::~String()
 {
 	if (_str != nullptr)

@@ -35,7 +35,9 @@ public:
 	int IndexOf(String const&);
 	int IndexOf(char const*);
 	bool Contains(String const&);
-
+	///////////////////////////////////
+	void Remove(int);
+	void Remove(int start, int count);
 	///////////////////////////////////
 	~String();
 

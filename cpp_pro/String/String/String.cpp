@@ -194,14 +194,15 @@ String String::ToString(double d)
 	s_num.Concat('.');
 
 	//// write double part
-	//double right = abs(d - left);
-	//sz = GetSizeOfDouble(right);
+	double right = abs(d - left);
+	sz = GetSizeOfDouble(right);
 	////cout << "\nsz -> " << sz << endl;
-	//pw = pow(10, sz);
-	//right *= pw;
+	pw = pow(10, sz);
+	right *= pw;
 	////cout << endl << "right = " << right << endl;
-	//right = TruncRightNulls(right);
+	right = TruncRightNulls(right);
 	//cout << endl << "right = " << right << endl;
+	s_num.ConcatNum(right);
 	return s_num;
 }
 

@@ -31,9 +31,14 @@ int main()
 		s.PrintLn();*/
 
 		//String s = (String) (2);
-		String s = "test";
+		//String s = "test";
 		//s.ConcatNum(123);
-		s.Concat('A');
+		//s.Concat('A');
+		//s.PrintLn();
+		
+		//Test Concat(double)
+		String s = "test ";
+		s.Concat(-123.456);
 		s.PrintLn();
 	}
 	catch (char const* exc)

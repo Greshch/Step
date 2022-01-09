@@ -12,6 +12,7 @@ public:
 	String(const char* str);
 	explicit String(unsigned capacity);
 	String(String const&);
+	String& operator= (String);
 	//////////////////////////////////////
 	void Print() const;
 	void PrintLn() const;
@@ -36,14 +37,28 @@ public:
 	int IndexOf(char const*);
 	bool Contains(String const&);
 	///////////////////////////////////
+	bool EndsWith(String const&);
+	bool StartsWith(String const&);
+	///////////////////////////////////
 	void Remove(int);
 	void Remove(int start, int count);
+	///////////////////////////////////
+	void Replace(char R, char Z); 
+	void Replace(String const& substr, String const& rep);
+	void Insert(char , int);
+	void Insert(char const*, int);
+	void Insert(String const&, int);
+	///////////////////////////////////
+	String* Split(char separator, int& pieces);
+	void Trim();
+	void TrimStart();
+	void TrimEnd();
 	///////////////////////////////////
 	~String();
 
 	
 private:
-	static const unsigned START_CAPACITY = 2;
+	static const unsigned START_CAPACITY = 16;
 	void ReallocNCopy();
 	void ReallocNCopy(int sz);
 	void Clear();

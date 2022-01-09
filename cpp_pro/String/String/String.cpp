@@ -15,6 +15,18 @@ String::String(String const& obj) : String(obj.GetCharArray())
 	
 }
 
+String& String::operator=(String obj)
+{
+	if (this == &obj)
+		return *this;
+	_capacity = obj._capacity;
+	_str = new char[_capacity];
+	Clear();
+
+	strcpy_s(_str, _capacity, obj._str);
+	return *this;
+}
+
 String::String(const char* str) : String(strlen(str) + 1)
 {
 	strcpy_s(_str, _capacity, str);
@@ -217,6 +229,16 @@ bool String::Contains(String const& obj)
 	return IndexOf(obj._str) != -1;
 }
 
+bool String::EndsWith(String const& s)
+{
+	return IndexOf(s) == strlen(_str) - strlen(s._str);
+}
+
+bool String::StartsWith(String const& s)
+{
+	return IndexOf(s) == 0;
+}
+
 void String::Remove(int index)
 {
 	int len = strlen(_str);
@@ -240,16 +262,203 @@ void String::Remove(int start, int count)
 
 	for (int i = 0; i < count; i++)
 	{
-		_str[start + i] = '\0';
+		//_str[start + i] = '\0';
+		_str[start + i] = ' ';
 	}
 
 	len = len - start;
 	int i = start;
-	for (; i < len; i++)
+	for (; i < /*len*/ start + len; i++)
 	{
 		_str[i] = _str[i + count];
 	}
 	_str[i] = '\0';
+}
+
+void String::Replace(char R, char Z)
+{
+	using std::cout;
+	using std::endl;
+	int findR = 0;
+	while (true)
+	{
+		findR = IndexOf(R, findR);
+		if (findR == -1)
+			break;
+		//cout << "#" << R << " -> " << findR << endl;
+		_str[findR] = Z;
+		++findR;
+	}
+}
+
+void String::Replace(String const& substr, String const& rep)
+{
+	using std::cout;
+	using std::endl;
+	int findR = 0;
+	int len = strlen(substr._str);
+	while (true)
+	{
+		findR = IndexOf(substr);
+		if (findR == -1)
+			break;
+		//cout << "# " << findR << endl;
+		Remove(findR, len);
+		Insert(rep, findR);
+		//cout << _str << endl;
+	}
+}
+
+void String::Insert(char ch, int pos)
+{
+	int len = strlen(_str);
+	if (pos < 0 || pos > len)
+		return;
+	if (_capacity <= len + 1)
+	{
+		ReallocNCopy();
+	}
+
+	for (int i = len; i > pos; i--)
+	{
+		_str[i] = _str[i - 1];
+	}
+	_str[pos] = ch;
+	_str[len + 1] = '\0';
+}
+
+void String::Insert(char const* str, int pos)
+{
+	using std::cout;
+	using std::endl;
+	while (*str)
+	{
+		Insert(*str++, pos++);
+		//str++;
+	}
+	cout << endl;
+}
+
+void String::Insert(String const& s, int pos)
+{
+	Insert(s._str, pos);
+}
+
+String* String::Split(char separator, int& pieces)
+{
+	using namespace std;
+	TrimStart();
+	TrimEnd();
+	int len = strlen(_str);
+	int cnt = 0;
+	bool flag = true;
+	for (int i = 0; i < len; i++)
+	{
+		if (_str[i] == separator)
+		{
+			flag = true;
+			//cout << endl;
+		}
+		else
+		{
+			if (flag == true)
+			{
+				//cout << cnt << "." << _str[i] << endl;
+				++cnt;
+				flag = false;
+			}
+			else
+			{
+				//cout << "#" << _str[i];
+			}
+		}
+	}
+	//cout << cnt << endl;
+	pieces = cnt;
+	String* words = new String[cnt];
+	flag = true;
+	int index = 0;
+	for (int i = 0; i < len; i++)
+	{
+		if (_str[i] == separator)
+		{
+			flag = true;
+			//cout << endl;
+		}
+		else
+		{
+			if (flag == true)
+			{
+				//cout << cnt << "." << _str[i] << endl;
+				words[index++] =  "";
+				words[index - 1].Concat(_str[i]);
+				flag = false;
+			}
+			else
+			{
+				//cout << "#" << _str[i];
+				words[index - 1].Concat(_str[i]);
+			}
+		}
+	}
+	return words;
+}
+
+void String::Trim()
+{
+	TrimStart();
+	TrimEnd();
+}
+
+void String::TrimStart()
+{
+	using namespace std;
+	char* p = _str;
+	bool flag = false;
+	char* tmp = new char[strlen(_str) + 1];
+	int i = 0;
+	while (*p)
+	{
+		if (*p != ' ' && flag == false)
+		{
+			flag = true;
+		}
+
+		if (flag)
+		{
+			//cout << *p;
+			tmp[i++] = *p;
+		}
+		
+		++p;
+	}
+	tmp[i] = '\0';
+	strcpy_s(_str, strlen(_str) - 1, tmp);
+	//delete[] tmp;
+}
+
+void String::TrimEnd()
+{
+	using namespace std;
+	char* p = _str + strlen(_str) - 1;
+	bool flag = false;
+	int i = 0;
+	while (*p)
+	{
+		if (*p != ' ' && flag == false)
+		{
+			flag = true;
+		}
+
+		if (flag)
+		{
+			//cout << *p;
+			break;
+		}
+		--p;
+	}
+	++p;
+	*p = '\0';
 }
 
 String::~String()

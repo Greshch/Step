@@ -79,11 +79,54 @@ int main()
 		str.Remove(5);
 		str.PrintLn();*/
 
-		// Test Remove(int)
+		// Test Remove(int, int)
 		/*String str = "onetwozero";
 		str.PrintLn();
 		str.Remove(2, 5);
 		str.PrintLn();*/
+
+		// Test Replace(int R, int Z)
+		/*String str = "onetwozero";
+		str.PrintLn();
+		str.Replace('e', '#');
+		str.PrintLn();*/
+
+		// Test Replace(String const& substr, String const& rep)
+		/*String str = "onetwozerofouroneend";
+		str.PrintLn();
+		str.Replace("one", "test");
+		str.PrintLn();*/
+
+		//Test insert(char, int)
+		/*String str = "abc";
+		str.PrintLn();
+		str.Insert('X', 1);
+		str.Insert('X', 1);
+		str.Insert('X', 1);
+		str.Insert('L', 1);
+		str.PrintLn();*/
+
+		//Test insert(char const*, int);
+		/*String str = "abc";
+		str.Insert("12", 2);
+		str.PrintLn();*/
+
+		//Test StartsWith & EndWith
+		/*String str = "onetwothree";
+		str.PrintLn();
+		cout << str.StartsWith("one") << endl;
+		cout << str.EndsWith("three");*/
+
+		//Test Split
+		/*String str = "    hello,world,test,xyz  ";
+		int sz = 0;
+		str.PrintLn();
+		String* words = str.Split(',', sz);
+		for (int i = 0; i < sz; i++)
+		{
+			words[i].PrintLn();
+		}
+		delete[] words;*/
 	}
 	catch (char const* exc)
 	{

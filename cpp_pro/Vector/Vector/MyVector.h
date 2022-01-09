@@ -1,0 +1,27 @@
+#pragma once
+class MyVector
+{
+private:
+	int* ar;
+	int size;
+	int capacity;
+
+public:
+	////////////////////////////////////
+	MyVector(int capacity);
+	MyVector();
+	~MyVector();
+	////////////////////////////////////
+	int GetSize() const;
+	int GetCapacity() const;
+	////////////////////////////////////
+	void PushBack(int);
+	////////////////////////////////////
+	int& operator[] (int);
+	////////////////////////////////////
+
+private:
+	static const int DEFAULT_CAPACITY = 10;
+	void EnsureCapacity(int new_capacity);
+};
+

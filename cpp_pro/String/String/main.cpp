@@ -127,6 +127,12 @@ int main()
 			words[i].PrintLn();
 		}
 		delete[] words;*/
+
+		//Test reverse
+		/*String str = "abcdefg";
+		str.PrintLn();
+		str.Reverse();
+		str.PrintLn();*/
 	}
 	catch (char const* exc)
 	{

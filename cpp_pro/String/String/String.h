@@ -54,6 +54,8 @@ public:
 	void TrimStart();
 	void TrimEnd();
 	///////////////////////////////////
+	void Reverse();
+	///////////////////////////////////
 	~String();
 
 	

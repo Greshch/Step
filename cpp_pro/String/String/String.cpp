@@ -1,6 +1,7 @@
 #include "String.h"
 #include <iostream>
 #include <cstring>
+#include <algorithm>
 #include <cmath>
 
 String::String(unsigned capacity)
@@ -459,6 +460,15 @@ void String::TrimEnd()
 	}
 	++p;
 	*p = '\0';
+}
+
+void String::Reverse()
+{
+	int len = strlen(_str);
+	for (int i = 0; i < len / 2; i++)
+	{
+		std::swap(_str[i], _str[len - 1 - i]);
+	}
 }
 
 String::~String()

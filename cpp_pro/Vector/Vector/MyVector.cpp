@@ -1,4 +1,5 @@
 #include "MyVector.h"
+#include <iostream>
 
 MyVector::MyVector(int capacity) : capacity(capacity), size(0), ar(new int[capacity])
 {
@@ -21,6 +22,16 @@ int MyVector::GetSize() const
 int MyVector::GetCapacity() const
 {
 	return capacity;
+}
+
+void MyVector::Print() const
+{
+	using namespace std;
+	for (int i = 0; i < size; i++)
+	{
+		cout << ar[i] << " ";
+	}
+	cout << endl;
 }
 
 void MyVector::PushBack(int elem)
@@ -57,6 +68,18 @@ void MyVector::RemoveAt(int index)
 	for (int i = index; i < size; i++)
 	{
 		ar[i] = ar[i + 1];
+	}
+}
+
+void MyVector::Remove(int value)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (ar[i] == value)
+		{
+			RemoveAt(i);
+			--i;
+		}
 	}
 }
 

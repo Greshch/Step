@@ -29,6 +29,16 @@ void MyVector::PushBack(int elem)
 	ar[size++] = elem;
 }
 
+void MyVector::PushFront(int elem)
+{
+	EnsureCapacity(size + 1);
+	for (int i = size++; i > 0; i--)
+	{
+		ar[i] = ar[i - 1];
+	}
+	ar[0] = elem;
+}
+
 int& MyVector::operator[](int index)
 {
 	return ar[index];

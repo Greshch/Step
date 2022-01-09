@@ -73,7 +73,7 @@ private:
 	unsigned GetSizeOfNum(unsigned num);
 	unsigned GetSizeOfDouble(double d);
 	unsigned TruncRightNulls(unsigned num);
-
 	bool FromIndexContainsStr(char const*, int);
+	bool SearchInt(int*, int, int);
 };
 

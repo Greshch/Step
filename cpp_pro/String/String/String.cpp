@@ -482,6 +482,28 @@ void String::SortZA()
 	Reverse();
 }
 
+void String::Shuffle()
+{
+	srand(time(0));
+	int len = strlen(_str);
+	//Prepare random indexes
+	int* indexes = new int[len];
+	for (int i = 0; i < len;)
+	{
+		int cur = rand() % len;
+		if (!SearchInt(indexes, len, cur))
+		{
+			indexes[i++] = cur;
+		}
+	}
+	//Shuffle in its order
+	for (int i = 0; i < len; i++)
+	{
+		std::swap(_str[i], _str[indexes[i]]);
+	}
+	delete[] indexes;
+}
+
 void String::RandomFill()
 {
 	srand(time(0));
@@ -633,4 +655,14 @@ bool String::FromIndexContainsStr(char const* str, int id)
 		}
 	}
 	return true;
+}
+
+bool String::SearchInt(int* arr, int sz, int num)
+{
+	for (int i = 0; i < sz; i++)
+	{
+		if (arr[i] == num)
+			return true;
+	}
+	return false;
 }

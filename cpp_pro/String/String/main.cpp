@@ -147,8 +147,14 @@ int main()
 		str.PrintLn();*/
 
 		//Test RandomFill()
-		String str(10);
+		/*String str(10);
 		str.RandomFill();
+		str.PrintLn();*/
+
+		//Test Shuffle()
+		String str = "test string for shuffle!";
+		str.PrintLn();
+		str.Shuffle();
 		str.PrintLn();
 	}
 	catch (char const* exc)

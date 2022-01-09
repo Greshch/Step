@@ -55,6 +55,11 @@ public:
 	void TrimEnd();
 	///////////////////////////////////
 	void Reverse();
+	void SortAZ();
+	void SortZA();
+	///////////////////////////////////
+	void Shuffle();
+	void RandomFill();
 	///////////////////////////////////
 	~String();
 

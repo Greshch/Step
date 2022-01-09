@@ -471,6 +471,27 @@ void String::Reverse()
 	}
 }
 
+void String::SortAZ()
+{
+	std::sort(_str, _str + strlen(_str) - 1);
+}
+
+void String::SortZA()
+{
+	SortAZ();
+	Reverse();
+}
+
+void String::RandomFill()
+{
+	srand(time(0));
+	for (int i = 0; i < _capacity - 1; i++)
+	{
+		char ch = 30 + rand() % 120;
+		_str[i] = ch;
+	}
+}
+
 String::~String()
 {
 	if (_str != nullptr)

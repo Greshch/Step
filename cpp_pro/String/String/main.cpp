@@ -133,6 +133,23 @@ int main()
 		str.PrintLn();
 		str.Reverse();
 		str.PrintLn();*/
+
+		//Test SortAZ()
+		/*String str = "hello, dear! How is it goig?";
+		str.PrintLn();
+		str.SortAZ();
+		str.PrintLn();*/
+
+		//Test SortZA()
+		/*String str = "hello, dear! How is it goig, Ann?";
+		str.PrintLn();
+		str.SortZA();
+		str.PrintLn();*/
+
+		//Test RandomFill()
+		String str(10);
+		str.RandomFill();
+		str.PrintLn();
 	}
 	catch (char const* exc)
 	{

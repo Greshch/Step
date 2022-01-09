@@ -17,6 +17,8 @@ public:
 	////////////////////////////////////
 	void PushBack(int);
 	void PushFront(int);
+	void Insert(int index, int value);
+	void RemoveAt(int index);
 	////////////////////////////////////
 	int& operator[] (int);
 	////////////////////////////////////

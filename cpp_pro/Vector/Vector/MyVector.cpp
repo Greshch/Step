@@ -39,6 +39,27 @@ void MyVector::PushFront(int elem)
 	ar[0] = elem;
 }
 
+void MyVector::Insert(int index, int value)
+{
+	if (index < 0 || index >= capacity)	return;
+	EnsureCapacity(size + 1);
+	for (int i = size++; i > index; i--)
+	{
+		ar[i] = ar[i - 1];
+	}
+	ar[index] = value;
+}
+
+void MyVector::RemoveAt(int index)
+{
+	if (index < 0 || index >= capacity)	return;
+	--size;
+	for (int i = index; i < size; i++)
+	{
+		ar[i] = ar[i + 1];
+	}
+}
+
 int& MyVector::operator[](int index)
 {
 	return ar[index];

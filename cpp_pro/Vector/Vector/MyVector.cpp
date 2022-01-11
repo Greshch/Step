@@ -10,6 +10,12 @@ MyVector::MyVector() : MyVector(DEFAULT_CAPACITY)
 {
 }
 
+MyVector::MyVector(MyVector const& obj)
+{
+	std::cout << "Copy construct" << std::endl;
+	Clone(obj);
+}
+
 MyVector::~MyVector()
 {
 	delete[] ar;
@@ -181,7 +187,40 @@ void MyVector::Shuffle()
 	delete[] indexes;
 }
 
+bool MyVector::Equals(MyVector const& other) const
+{
+	if (size != other.size)	return false;
+	for (int i = 0; i < size; i++)
+	{
+		if (ar[i] != other[i])	return false;
+	}
+	return true;
+}
+
+int MyVector::GetElementAt(int i) const
+{
+	if (i < 0 || i >= size)	throw "Out of range!";
+	return ar[i];
+}
+
+void MyVector::Clone(MyVector const& obj)
+{
+	if (obj.ar != nullptr)	delete[] ar;
+	capacity = obj.capacity;
+	size = obj.size;
+	ar = new int[size];
+	for (int i = 0; i < size; i++)
+	{
+		ar[i] = obj[i];
+	}
+}
+
 int& MyVector::operator[](int index)
+{
+	return ar[index];
+}
+
+int MyVector::operator[](int index) const
 {
 	return ar[index];
 }

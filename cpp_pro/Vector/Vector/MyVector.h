@@ -10,6 +10,7 @@ public:
 	////////////////////////////////////
 	MyVector(int capacity);
 	MyVector();
+	MyVector(MyVector const&);
 	~MyVector();
 	////////////////////////////////////
 	int GetSize() const;
@@ -32,8 +33,12 @@ public:
 	void SortAsc();
 	void SortDesc();
 	void Shuffle();
+	bool Equals(MyVector const& other) const;
+	int GetElementAt(int) const;
 	////////////////////////////////////
+	void Clone(MyVector const& obj);
 	int& operator[] (int);
+	int operator[] (int) const;
 	////////////////////////////////////
 
 private:

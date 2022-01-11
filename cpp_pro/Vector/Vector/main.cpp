@@ -151,13 +151,52 @@ int main()
 	vec.Print();*/
 
 	//Test Shuffle	
-	MyVector vec;
+	/*MyVector vec;
 	for (int i = 0; i < 10; i++)
 	{
 		vec.PushBack(i + 1);
 	}
 	vec.Print();
 	vec.Shuffle();
-	vec.Print();
+	vec.Print();*/
+
+	//Test Equals
+	/*MyVector a, b;
+	a.PushBack(1);
+	a.PushBack(2);
+
+	b.PushBack(1);
+	b.PushBack(2);
+
+	a.Print();
+	b.Print();
+	cout << a.Equals(b) << endl;*/
+
+	//Test GetElementAt
+	/*try
+	{
+		MyVector v;
+		v.PushBack(777);
+		cout << v.GetElementAt(1) << endl;
+	}
+	catch (char const* ex)
+	{
+		cout << ex << endl;
+	}*/
+
+	//Test Clone
+	/*MyVector a, b;
+	b.PushBack(1);
+	b.PushBack(2);
+	a.Print();
+	a.Clone(b);
+	a.Print();*/
+
+	//Test CopyConstructor
+	MyVector b;
+	b.PushBack(1);
+	b.PushBack(2);
+	MyVector a = b;
+	a.Print();
 	return 0;
 }

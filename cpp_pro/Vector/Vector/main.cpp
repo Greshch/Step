@@ -193,10 +193,39 @@ int main()
 	a.Print();*/
 
 	//Test CopyConstructor
-	MyVector b;
+	/*MyVector b;
 	b.PushBack(1);
 	b.PushBack(2);
 	MyVector a = b;
+	a.Print();*/
+
+	//Test operator=
+	/*MyVector a;
+	a.PushBack(3);
+	a.PushBack(2);
+	a.PushBack(1);
 	a.Print();
+
+	MyVector b;
+	for (int i = 0; i < 5; i++)
+	{
+		b.PushBack(i + 1);
+	}
+	a = b;
+	a.Print();*/
+
+	//Test operator<<
+	/*MyVector a;
+	a.PushBack(3);
+	a.PushBack(2);
+	a.PushBack(1);
+	a.PushBack(6);
+	a.PushBack(7);
+	cout << a;*/
+
+	//Test operator>>
+	MyVector a;
+	cin >> a;
+	cout << a;
 	return 0;
 }

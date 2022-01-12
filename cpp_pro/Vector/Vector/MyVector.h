@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 class MyVector
 {
 private:
@@ -11,6 +13,7 @@ public:
 	MyVector(int capacity);
 	MyVector();
 	MyVector(MyVector const&);
+	MyVector& operator=(MyVector&);
 	~MyVector();
 	////////////////////////////////////
 	int GetSize() const;
@@ -39,6 +42,7 @@ public:
 	void Clone(MyVector const& obj);
 	int& operator[] (int);
 	int operator[] (int) const;
+	bool operator==(MyVector const&);
 	////////////////////////////////////
 
 private:
@@ -46,4 +50,7 @@ private:
 	void EnsureCapacity(int new_capacity);
 	static bool SearchInt(int* arr, int sz, int num);
 };
+
+std::ostream& operator<<(std::ostream&, MyVector const&);
+std::istream& operator>>(std::istream&, MyVector&);
 

@@ -16,6 +16,12 @@ MyVector::MyVector(MyVector const& obj)
 	Clone(obj);
 }
 
+MyVector& MyVector::operator=(MyVector& obj)
+{
+	if (&obj != this)	Clone(obj);
+	return *this;
+}
+
 MyVector::~MyVector()
 {
 	delete[] ar;
@@ -225,6 +231,12 @@ int MyVector::operator[](int index) const
 	return ar[index];
 }
 
+bool MyVector::operator==(MyVector const& obj)
+{
+	if (&obj == this)	return true;
+	return Equals(obj);
+}
+
 void MyVector::EnsureCapacity(int param)
 {
 	if (param <= capacity)	return;
@@ -247,4 +259,32 @@ bool MyVector::SearchInt(int* arr, int sz, int num)
 			return true;
 	}
 	return false;
+}
+
+std::ostream& operator<<(std::ostream& os, MyVector const& obj)
+{
+	for (int i = 0; i < obj.GetSize(); i++)
+	{
+		os << obj[i] << " ";
+		if (i && i + 1 % 10 == 0)
+			os << std::endl;
+	}
+	return os;
+}
+
+std::istream& operator>>(std::istream& ist, MyVector& obj)
+{
+	
+	do
+	{
+		std::cout << "more - y\n";
+		char ch;
+		ist >> ch;
+		if (ch != 'y')	break;
+		std::cout << ": " ;
+		int tmp;
+		ist >> tmp;
+		obj.PushBack(tmp);
+	} while (true);
+	return ist;
 }

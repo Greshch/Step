@@ -2,6 +2,25 @@
 #include <iostream>
 using namespace std;
 
+SinglyLinkedList::SinglyLinkedList()
+{
+}
+
+SinglyLinkedList::SinglyLinkedList(SinglyLinkedList const& obj)
+{
+	Clone(obj);
+}
+
+SinglyLinkedList& SinglyLinkedList::operator=(SinglyLinkedList& obj)
+{
+	if (&obj != this)
+	{
+		Clear();
+		Clone(obj);
+	}
+	return *this;
+}
+
 void SinglyLinkedList::Print() const
 {
 	Node* cur = head;
@@ -112,6 +131,13 @@ int SinglyLinkedList::LastIndexOf(int num)
 
 void SinglyLinkedList::Reverse()
 {
+	SinglyLinkedList tmp;
+	Reverse(tmp, head);
+	*this = tmp;
+}
+
+void SinglyLinkedList::PrintReverse()
+{
 	PrintReverse(head);
 }
 
@@ -123,11 +149,24 @@ SinglyLinkedList::~SinglyLinkedList()
 void SinglyLinkedList::Clear()
 {
 	Node* cur = head;
+	count = 0;
 	for (int i = 0; i < count; i++)
 	{
 		Node* tmp = cur;
 		cur = cur->next;
 		delete tmp;
+	}
+	head = tail = nullptr;
+}
+
+void SinglyLinkedList::Clone(SinglyLinkedList const& obj)
+{
+	Node* cur = obj.head;
+	for (int i = 0; i < obj.count; i++)
+	{
+		int val = cur->value;
+		this->Add(val);
+		cur = cur->next;
 	}
 }
 
@@ -144,5 +183,20 @@ void SinglyLinkedList::PrintReverse(Node* node)
 		val = node->value;
 		PrintReverse(node->next);
 		std::cout << val << " ";
+	}
+}
+
+void SinglyLinkedList::Reverse(SinglyLinkedList& obj, Node* node)
+{
+	int val;
+	if (node == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		val = node->value;
+		Reverse(obj, node->next);
+		obj.Add(val);
 	}
 }

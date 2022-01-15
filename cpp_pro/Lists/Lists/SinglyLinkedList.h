@@ -13,6 +13,11 @@ private:
 	int count = 0;
 
 public:
+	//////////////////////////////////
+	SinglyLinkedList();
+	SinglyLinkedList(SinglyLinkedList const&);
+	SinglyLinkedList& operator=(SinglyLinkedList&);
+	//////////////////////////////////
 	void Print() const;
 	bool IsEmpty() const;
 	void Add(int val);
@@ -20,10 +25,13 @@ public:
 	void Remove(int pos);
 	int LastIndexOf(int num);
 	void Reverse();
+	void PrintReverse();
 	~SinglyLinkedList();
 
 private:
 	void Clear();
+	void Clone(SinglyLinkedList const& obj);
 	void PrintReverse(Node*);
+	void Reverse(SinglyLinkedList& obj ,Node* node);
 };
 

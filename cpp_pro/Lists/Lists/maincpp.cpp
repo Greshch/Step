@@ -73,8 +73,39 @@ int main()
 		obj.Add(i);
 	}
 	obj.Print();
-	obj.Reverse();*/
+	obj.PrintReverse();*/
 
+	//Test CopyConstructor
+	/*SinglyLinkedList a;
+	for (int i = 1; i <= 4; i++)
+	{
+		a.Add(i);
+	}
+	a.Print();
+	SinglyLinkedList b = a;
+	b.Print();*/
 
+	//Test operator =
+	//SinglyLinkedList a;
+	//for (int i = 1; i <= 4; i++)
+	//{
+	//	a.Add(i);
+	//}
+	//a.Print();
+	//SinglyLinkedList b;
+	//b.Print();
+	//b = a;
+	////a = b;
+	//a.Print();
+
+	//Test Reverse
+	SinglyLinkedList a;
+	for (int i = 1; i <= 4; i++)
+	{
+		a.Add(i);
+	}
+	a.Print();
+	a.Reverse();
+	a.Print();
 	return 0;
 }

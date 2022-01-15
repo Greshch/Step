@@ -188,5 +188,20 @@ int main()
 	cin >> num;
 	obj.SetAt(index, num);
 	obj.Print();*/
+
+	//Test Merge
+	/*SinglyLinkedList a, b;
+	for (int i = 0; i < 5; i++)
+	{
+		a.Add(i);
+	}
+	a.Print();
+	for (int i = 10; i < 13; i++)
+	{
+		b.Add(i);
+	}
+	b.Print();
+	a.MergeWith(b);
+	a.Print();*/
 	return 0;
 }

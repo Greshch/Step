@@ -217,6 +217,13 @@ MyVector SinglyLinkedList::GetMyVector() const
 	return res;
 }
 
+void SinglyLinkedList::MergeWith(SinglyLinkedList const& obj)
+{
+	tail->next = obj.head;
+	count += obj.count;
+	tail = obj.tail;
+}
+
 void SinglyLinkedList::FillFromMyVector(MyVector const& obj)
 {
 	int sz = obj.GetSize();

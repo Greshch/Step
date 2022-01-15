@@ -19,8 +19,6 @@ public:
 	SinglyLinkedList();
 	SinglyLinkedList(SinglyLinkedList const&);
 	SinglyLinkedList& operator=(SinglyLinkedList&);
-	void Clone(SinglyLinkedList const& obj);
-	bool Equals(SinglyLinkedList const& obj) const;
 	//////////////////////////////////
 	void Print() const;
 	bool IsEmpty() const;
@@ -29,6 +27,8 @@ public:
 	void Remove(int pos);
 	int LastIndexOf(int num);
 	bool Contains(int elem);
+	void Clone(SinglyLinkedList const& obj);
+	bool Equals(SinglyLinkedList const& obj) const;
 	void Reverse();
 	void PrintReverse();
 	void SetAt(int index, int val);
@@ -37,12 +37,12 @@ public:
 	void SortAsc();
 	void SortDesc();
 	void Shuffle();
-	MyVector GetMyVector() const;
+	MyVector GetMyVector() const;// Insted ToArray
+	void MergeWith(SinglyLinkedList const&);
 	void FillFromMyVector(MyVector const&);
 
 private:
 	void Clear();
-	
 	void PrintReverse(Node*);
 	void Reverse(SinglyLinkedList& obj ,Node* node);
 };

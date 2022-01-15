@@ -99,13 +99,13 @@ int main()
 	//a.Print();
 
 	//Test Reverse
-	SinglyLinkedList a;
+	/*SinglyLinkedList a;
 	for (int i = 1; i <= 4; i++)
 	{
 		a.Add(i);
 	}
 	a.Print();
 	a.Reverse();
-	a.Print();
+	a.Print();*/
 	return 0;
 }

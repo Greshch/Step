@@ -129,6 +129,21 @@ int SinglyLinkedList::LastIndexOf(int num)
 	return result;
 }
 
+bool SinglyLinkedList::Contains(int elem)
+{
+	Node* cur = head;
+	for (int i = 0; i < count; i++)
+	{
+		int val = cur->value;
+		if (val == elem)
+		{
+			return true;
+		}
+		cur = cur->next;
+	}
+	return false;
+}
+
 void SinglyLinkedList::Reverse()
 {
 	SinglyLinkedList tmp;
@@ -139,6 +154,21 @@ void SinglyLinkedList::Reverse()
 void SinglyLinkedList::PrintReverse()
 {
 	PrintReverse(head);
+}
+
+void SinglyLinkedList::SetAt(int index, int val)
+{
+	if (index < 0 || index >= count)	return;
+	Node* cur = head;
+	for (int i = 0; true; i++)
+	{
+		if (i == index)
+		{
+			cur->value = val;
+			break;
+		}
+		cur = cur->next;
+	}
 }
 
 SinglyLinkedList::~SinglyLinkedList()

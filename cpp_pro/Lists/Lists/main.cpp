@@ -160,5 +160,33 @@ int main()
 	//a.Print();
 	//b.Print();
 	//cout << "a == b: " << a.Equals(b) << endl;
+
+	//Test Contains
+	/*SinglyLinkedList obj;
+	for (int i = 1; i <= 4; i++)
+	{
+		obj.Add(i);
+	}
+	obj.Print();
+	int num = 0;
+	cout << "num: ";
+	cin >> num;
+	cout << "Contains " << num << ": " << obj.Contains(num) << endl;*/
+
+	//Test SetAt
+	/*SinglyLinkedList obj;
+	for (int i = 0; i < 5; i++)
+	{
+		obj.Add(i);
+	}
+	obj.Print();
+	int index = 0;
+	int num = 0;
+	cout << "index: ";
+	cin >> index;
+	cout << "num: ";
+	cin >> num;
+	obj.SetAt(index, num);
+	obj.Print();*/
 	return 0;
 }

@@ -28,8 +28,10 @@ public:
 	void Insert(int pos, int val);
 	void Remove(int pos);
 	int LastIndexOf(int num);
+	bool Contains(int elem);
 	void Reverse();
 	void PrintReverse();
+	void SetAt(int index, int val);
 	~SinglyLinkedList();
 	//////////////////////////////////
 	void SortAsc();

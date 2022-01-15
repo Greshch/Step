@@ -147,5 +147,18 @@ int main()
 	a.Print();
 	a.Shuffle();
 	a.Print();*/
+
+	//Test Equals
+	//SinglyLinkedList a, b;
+	//for (int i = 1; i <= 4; i++)
+	//{
+	//	a.Add(i);
+	//	b.Add(i);
+	//}
+	////b.Add(-1);
+	////b.Remove(0);
+	//a.Print();
+	//b.Print();
+	//cout << "a == b: " << a.Equals(b) << endl;
 	return 0;
 }

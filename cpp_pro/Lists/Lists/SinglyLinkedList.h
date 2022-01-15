@@ -19,6 +19,8 @@ public:
 	SinglyLinkedList();
 	SinglyLinkedList(SinglyLinkedList const&);
 	SinglyLinkedList& operator=(SinglyLinkedList&);
+	void Clone(SinglyLinkedList const& obj);
+	bool Equals(SinglyLinkedList const& obj) const;
 	//////////////////////////////////
 	void Print() const;
 	bool IsEmpty() const;
@@ -38,7 +40,7 @@ public:
 
 private:
 	void Clear();
-	void Clone(SinglyLinkedList const& obj);
+	
 	void PrintReverse(Node*);
 	void Reverse(SinglyLinkedList& obj ,Node* node);
 };

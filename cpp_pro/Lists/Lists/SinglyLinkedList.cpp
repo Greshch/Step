@@ -220,6 +220,23 @@ void SinglyLinkedList::Clone(SinglyLinkedList const& obj)
 	}
 }
 
+bool SinglyLinkedList::Equals(SinglyLinkedList const& obj) const
+{
+	if (count != obj.count)	return false;
+	Node* cur = head;
+	Node* cur_obj = obj.head;
+	for (int i = 0; i < count; i++)
+	{
+		if (cur->value != cur_obj->value)
+		{
+			return false;
+		}
+		cur = cur->next;
+		cur_obj = cur_obj->next;
+	}
+	return true;
+}
+
 void SinglyLinkedList::PrintReverse(Node* node)
 {
 	int val;

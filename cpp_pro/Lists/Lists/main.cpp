@@ -107,5 +107,14 @@ int main()
 	a.Print();
 	a.Reverse();
 	a.Print();*/
+
+	SinglyLinkedList a;
+	for (int i = 0; i < 8; i++)
+	{
+		a.Add(rand() % 35);
+	}
+	a.Print();
+	MyVector v = a.GetMyVector();
+	v.Print();
 	return 0;
 }

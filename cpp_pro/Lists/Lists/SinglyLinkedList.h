@@ -1,4 +1,6 @@
 #pragma once
+#include "MyVector.h"
+
 class SinglyLinkedList
 {
 private:
@@ -27,6 +29,8 @@ public:
 	void Reverse();
 	void PrintReverse();
 	~SinglyLinkedList();
+	//////////////////////////////////
+	MyVector GetMyVector() const;
 
 private:
 	void Clear();

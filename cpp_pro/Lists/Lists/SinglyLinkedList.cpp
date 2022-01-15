@@ -146,6 +146,20 @@ SinglyLinkedList::~SinglyLinkedList()
 	Clear();
 }
 
+MyVector SinglyLinkedList::GetMyVector() const
+{
+	MyVector res;
+	Node* cur = head;
+	int result = -1;
+	for (int i = 0; i < count; i++)
+	{
+		int val = cur->value;
+		res.PushBack(val);
+		cur = cur->next;
+	}
+	return res;
+}
+
 void SinglyLinkedList::Clear()
 {
 	Node* cur = head;

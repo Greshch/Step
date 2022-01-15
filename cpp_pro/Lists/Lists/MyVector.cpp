@@ -12,7 +12,7 @@ MyVector::MyVector() : MyVector(DEFAULT_CAPACITY)
 
 MyVector::MyVector(MyVector const& obj)
 {
-	std::cout << "Copy construct" << std::endl;
+	//std::cout << "Copy construct" << std::endl;
 	Clone(obj);
 }
 

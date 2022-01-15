@@ -31,6 +31,7 @@ public:
 	~SinglyLinkedList();
 	//////////////////////////////////
 	void SortAsc();
+	void SortDesc();
 	MyVector GetMyVector() const;
 	void FillFromMyVector(MyVector const&);
 

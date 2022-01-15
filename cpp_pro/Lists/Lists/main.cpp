@@ -119,13 +119,23 @@ int main()
 	v.Print();*/
 
 	//Test SortAsc
-	SinglyLinkedList a;
+	/*SinglyLinkedList a;
 	for (int i = 0; i < 8; i++)
 	{
 		a.Add(rand() % 35);
 	}
 	a.Print();
 	a.SortAsc();
+	a.Print();*/
+
+	//Test SortAsc
+	/*SinglyLinkedList a;
+	for (int i = 0; i < 8; i++)
+	{
+		a.Add(rand() % 35);
+	}
 	a.Print();
+	a.SortDesc();
+	a.Print();*/
 	return 0;
 }

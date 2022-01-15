@@ -155,6 +155,15 @@ void SinglyLinkedList::SortAsc()
 	FillFromMyVector(vec);
 }
 
+void SinglyLinkedList::SortDesc()
+{
+	MyVector vec = GetMyVector();
+	vec.SortDesc();
+	//vec.Print();
+	Clear();
+	FillFromMyVector(vec);
+}
+
 MyVector SinglyLinkedList::GetMyVector() const
 {
 	MyVector res;

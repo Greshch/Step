@@ -137,5 +137,15 @@ int main()
 	a.Print();
 	a.SortDesc();
 	a.Print();*/
+
+	//Test Shuffle
+	/*SinglyLinkedList a;
+	for (int i = 0; i < 8; i++)
+	{
+		a.Add(rand() % 35);
+	}
+	a.Print();
+	a.Shuffle();
+	a.Print();*/
 	return 0;
 }

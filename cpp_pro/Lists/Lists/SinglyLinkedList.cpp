@@ -164,6 +164,15 @@ void SinglyLinkedList::SortDesc()
 	FillFromMyVector(vec);
 }
 
+void SinglyLinkedList::Shuffle()
+{
+	MyVector vec = GetMyVector();
+	vec.Shuffle();
+	//vec.Print();
+	Clear();
+	FillFromMyVector(vec);
+}
+
 MyVector SinglyLinkedList::GetMyVector() const
 {
 	MyVector res;

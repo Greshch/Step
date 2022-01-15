@@ -32,6 +32,7 @@ public:
 	//////////////////////////////////
 	void SortAsc();
 	void SortDesc();
+	void Shuffle();
 	MyVector GetMyVector() const;
 	void FillFromMyVector(MyVector const&);
 

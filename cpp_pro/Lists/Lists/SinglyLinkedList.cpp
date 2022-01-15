@@ -146,6 +146,15 @@ SinglyLinkedList::~SinglyLinkedList()
 	Clear();
 }
 
+void SinglyLinkedList::SortAsc()
+{
+	MyVector vec = GetMyVector();
+	vec.SortAsc();
+	//vec.Print();
+	Clear();
+	FillFromMyVector(vec);
+}
+
 MyVector SinglyLinkedList::GetMyVector() const
 {
 	MyVector res;
@@ -158,6 +167,15 @@ MyVector SinglyLinkedList::GetMyVector() const
 		cur = cur->next;
 	}
 	return res;
+}
+
+void SinglyLinkedList::FillFromMyVector(MyVector const& obj)
+{
+	int sz = obj.GetSize();
+	for (int i = 0; i < sz; i++)
+	{
+		Add(obj[i]);
+	}
 }
 
 void SinglyLinkedList::Clear()

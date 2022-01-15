@@ -108,13 +108,24 @@ int main()
 	a.Reverse();
 	a.Print();*/
 
-	SinglyLinkedList a;
+	//Test GetVector
+	/*SinglyLinkedList a;
 	for (int i = 0; i < 8; i++)
 	{
 		a.Add(rand() % 35);
 	}
 	a.Print();
 	MyVector v = a.GetMyVector();
-	v.Print();
+	v.Print();*/
+
+	//Test SortAsc
+	SinglyLinkedList a;
+	for (int i = 0; i < 8; i++)
+	{
+		a.Add(rand() % 35);
+	}
+	a.Print();
+	a.SortAsc();
+	a.Print();
 	return 0;
 }

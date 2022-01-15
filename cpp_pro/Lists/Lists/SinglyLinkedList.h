@@ -30,7 +30,9 @@ public:
 	void PrintReverse();
 	~SinglyLinkedList();
 	//////////////////////////////////
+	void SortAsc();
 	MyVector GetMyVector() const;
+	void FillFromMyVector(MyVector const&);
 
 private:
 	void Clear();

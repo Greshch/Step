@@ -18,7 +18,8 @@ public:
 	//////////////////////////////////
 	SinglyLinkedList();
 	SinglyLinkedList(SinglyLinkedList const&);
-	SinglyLinkedList& operator=(SinglyLinkedList&);
+	SinglyLinkedList& operator=(SinglyLinkedList const&);
+	SinglyLinkedList operator+(SinglyLinkedList const& obj);
 	//////////////////////////////////
 	void Print() const;
 	bool IsEmpty() const;

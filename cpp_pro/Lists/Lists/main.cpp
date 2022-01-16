@@ -202,6 +202,27 @@ int main()
 	}
 	b.Print();
 	a.MergeWith(b);
-	a.Print();*/
+	a.Print();
+
+	b.Print();
+	b.MergeWith(b);
+	b.Print();*/
+
+	/*SinglyLinkedList a, b;
+	for (int i = 0; i < 5; i++)
+	{
+		a.Add(i);
+	}
+	a.Print();
+	for (int i = 10; i < 13; i++)
+	{
+		b.Add(i);
+	}
+	b.Print();
+	SinglyLinkedList c = a + b;
+	c.Print();
+	SinglyLinkedList d;
+	d = b + a;
+	d.Print();*/
 	return 0;
 }

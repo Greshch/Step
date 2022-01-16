@@ -11,7 +11,7 @@ SinglyLinkedList::SinglyLinkedList(SinglyLinkedList const& obj)
 	Clone(obj);
 }
 
-SinglyLinkedList& SinglyLinkedList::operator=(SinglyLinkedList& obj)
+SinglyLinkedList& SinglyLinkedList::operator=(SinglyLinkedList const& obj)
 {
 	if (&obj != this)
 	{
@@ -19,6 +19,13 @@ SinglyLinkedList& SinglyLinkedList::operator=(SinglyLinkedList& obj)
 		Clone(obj);
 	}
 	return *this;
+}
+
+SinglyLinkedList SinglyLinkedList::operator+(SinglyLinkedList const& obj)
+{
+	SinglyLinkedList sum = *this;
+	sum.MergeWith(obj);
+	return sum;
 }
 
 void SinglyLinkedList::Print() const
@@ -219,8 +226,17 @@ MyVector SinglyLinkedList::GetMyVector() const
 
 void SinglyLinkedList::MergeWith(SinglyLinkedList const& obj)
 {
-	tail->next = obj.head;
 	count += obj.count;
+	if (&obj == this)
+	{
+		Node* new_head = new Node{ head->value, head->next };
+		tail->next = head;
+		Node* tmp = head;
+		head = new_head;
+		delete tmp;
+	}
+	tail->next = obj.head;
+	//count += obj.count;
 	tail = obj.tail;
 }
 

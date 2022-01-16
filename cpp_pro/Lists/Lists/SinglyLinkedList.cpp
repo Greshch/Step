@@ -28,6 +28,12 @@ SinglyLinkedList SinglyLinkedList::operator+(SinglyLinkedList const& obj)
 	return sum;
 }
 
+SinglyLinkedList& SinglyLinkedList::operator+=(SinglyLinkedList const& obj)
+{
+	MergeWith(obj);
+	return *this;
+}
+
 void SinglyLinkedList::Print() const
 {
 	Node* cur = head;

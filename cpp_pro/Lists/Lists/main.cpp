@@ -208,6 +208,7 @@ int main()
 	b.MergeWith(b);
 	b.Print();*/
 
+	// Test operator+
 	/*SinglyLinkedList a, b;
 	for (int i = 0; i < 5; i++)
 	{
@@ -224,5 +225,21 @@ int main()
 	SinglyLinkedList d;
 	d = b + a;
 	d.Print();*/
+
+	//Test operator +=
+	SinglyLinkedList a, b;
+	for (int i = 0; i < 5; i++)
+	{
+		a.Add(i);
+	}
+	a.Print();
+	for (int i = 10; i < 13; i++)
+	{
+		b.Add(i);
+	}
+	b.Print();
+	//a += a;
+	a += b;
+	a.Print();
 	return 0;
 }

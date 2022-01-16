@@ -20,6 +20,7 @@ public:
 	SinglyLinkedList(SinglyLinkedList const&);
 	SinglyLinkedList& operator=(SinglyLinkedList const&);
 	SinglyLinkedList operator+(SinglyLinkedList const& obj);
+	SinglyLinkedList& operator+=(SinglyLinkedList const& obj);
 	//////////////////////////////////
 	void Print() const;
 	bool IsEmpty() const;

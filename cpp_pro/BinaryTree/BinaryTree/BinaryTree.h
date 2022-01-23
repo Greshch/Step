@@ -25,6 +25,7 @@ private:
 	void Add(Node* pre, Node* cur, int val);
 	void AddStack(int val);
 	void Clear(Node* node);
+	void ClearStack();
 	Node* Search(Node* node,int val);
 	Node* SearchStack(int val);
 };

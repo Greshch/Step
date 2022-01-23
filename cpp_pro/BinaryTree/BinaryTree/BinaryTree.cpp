@@ -156,6 +156,29 @@ void BinaryTree::Clear(Node* node)
 	delete node;
 }
 
+void BinaryTree::ClearStack()
+{
+	stack<Node*> repo;
+	repo.push(root);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			if (tmp->left != nullptr)
+			{
+				repo.push(tmp->left);
+			}
+			if (tmp->right != nullptr)
+			{
+				repo.push(tmp->right);
+			}
+			delete tmp;
+		}
+	}
+}
+
 BinaryTree::Node* BinaryTree::Search(Node* cur, int val)
 {
 	if (cur == nullptr || cur->_val == val)
@@ -206,7 +229,8 @@ BinaryTree::Node* BinaryTree::SearchStack(int value)
 
 void BinaryTree::Clear()
 {
-	Clear(root);
+	//Clear(root);
+	ClearStack();
 }
 
 bool BinaryTree::Search(int val)

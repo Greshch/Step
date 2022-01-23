@@ -120,6 +120,37 @@ BinaryTree::Node* BinaryTree::Search(Node* cur, int val)
 	}
 }
 
+BinaryTree::Node* BinaryTree::SearchStack(int value)
+{
+	stack<Node*> repo;
+	repo.push(root);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			int val = tmp->_val;
+			if (val == value)
+			{
+				return tmp;
+			}
+			if (value < val)
+			{
+				repo.push(tmp->left);
+			}
+			else
+			{
+				repo.push(tmp->right);
+			}
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+}
+
 void BinaryTree::Clear()
 {
 	Clear(root);
@@ -127,5 +158,6 @@ void BinaryTree::Clear()
 
 bool BinaryTree::Search(int val)
 {
-	return Search(root, val);
+	//return Search(root, val);
+	return SearchStack(val);
 }

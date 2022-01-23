@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 	//Test Search and Add
-	/*BinaryTree tree;
+	BinaryTree tree;
 	tree.Add(5);
 	tree.Add(3);
 	tree.Add(2);
@@ -17,9 +17,9 @@ int main()
 	int num{};
 	cout << "num: ";
 	cin >> num;
-	cout << num << " had been found: " << tree.Search(num) << endl;*/
+	cout << num << " had been found: " << tree.Search(num) << endl;
 
-	BinaryTree tree;
+	/*BinaryTree tree;
 	tree.Add(5);
 	tree.Add(3);
 	tree.Add(2);
@@ -27,6 +27,6 @@ int main()
 	tree.Add(7);
 	tree.Add(6);
 	tree.Add(8);
-	tree.Print();
+	tree.Print();*/
 	return 0;
 }

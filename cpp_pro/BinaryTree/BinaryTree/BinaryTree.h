@@ -23,6 +23,7 @@ private:
 	void PrintStack() const;
 	void Print(Node* node) const;
 	void Add(Node* pre, Node* cur, int val);
+	void AddStack(int val);
 	void Clear(Node* node);
 	Node* Search(Node* node,int val);
 	Node* SearchStack(int val);

@@ -5,7 +5,8 @@ using namespace std;
 
 void BinaryTree::Add(int val)
 {
-	Add(nullptr, root, val);
+	//Add(nullptr, root, val);
+	AddStack(val);
 }
 
 void BinaryTree::Print() const
@@ -89,6 +90,58 @@ void BinaryTree::Add(Node* pre, Node* cur, int val)
 	else
 	{
 		Add(cur, cur->right, val);
+	}
+}
+
+void BinaryTree::AddStack(int value)
+{
+	
+	if (root == nullptr)
+	{
+		Node* neo_node = new Node{ value };
+		root = neo_node;
+		return;
+	}
+	stack<Node*> repo;
+	repo.push(root);
+	bool left = false;
+	Node* prev = root;
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			int val = tmp->_val;
+			if (val == value)
+			{
+				return;
+			}
+			if (value < val)
+			{
+				left = true;
+				repo.push(tmp->left);
+			}
+			else
+			{
+				left = false;
+				repo.push(tmp->right);
+			}
+		}
+		else
+		{
+			Node* neo_node = new Node{ value, prev };
+			if (left)
+			{
+				prev->left = neo_node;
+			}
+			else
+			{
+				prev->right = neo_node;
+			}
+			return;
+		}
+		prev = tmp;
 	}
 }
 

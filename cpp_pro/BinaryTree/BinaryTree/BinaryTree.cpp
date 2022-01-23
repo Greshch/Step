@@ -76,7 +76,34 @@ void BinaryTree::Clear(Node* node)
 	delete node;
 }
 
+bool BinaryTree::Search(Node* cur, int val)
+{
+	if (cur == nullptr)
+	{
+		return false;
+	}
+
+	if (val == cur->_val)
+	{
+		return true;
+	}
+
+	if (val < cur->_val)
+	{
+		Search(cur->left, val);
+	}
+	else
+	{
+		Search(cur->right, val);
+	}
+}
+
 void BinaryTree::Clear()
 {
 	Clear(root);
+}
+
+bool BinaryTree::Search(int val)
+{
+	return Search(root, val);
 }

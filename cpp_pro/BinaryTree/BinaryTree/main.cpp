@@ -1,4 +1,6 @@
 #include "BinaryTree.h"
+#include <iostream>
+using namespace std;
 
 int main()
 {
@@ -11,5 +13,10 @@ int main()
 	tree.Add(6);
 	tree.Add(8);
 	tree.Print();
+
+	int num{};
+	cout << "num: ";
+	cin >> num;
+	cout << num << " had been found: " << tree.Search(num) << endl;
 	return 0;
 }

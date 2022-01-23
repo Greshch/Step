@@ -64,3 +64,19 @@ void BinaryTree::Add(Node* pre, Node* cur, int val)
 		Add(cur, cur->right, val);
 	}
 }
+
+void BinaryTree::Clear(Node* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	Print(node->left);
+	Print(node->right);
+	delete node;
+}
+
+void BinaryTree::Clear()
+{
+	Clear(root);
+}

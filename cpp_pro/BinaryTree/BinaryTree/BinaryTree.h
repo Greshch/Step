@@ -15,11 +15,12 @@ private:
 public:
 	void Add(int val);
 	void Print() const;
+	void Clear();
 	~BinaryTree();
 
 private:
 	void Print(Node* node) const;
 	void Add(Node* pre, Node* cur, int val);
-	void Clear();
+	void Clear(Node* node);
 };
 

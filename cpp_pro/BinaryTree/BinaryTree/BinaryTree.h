@@ -20,9 +20,10 @@ public:
 	~BinaryTree();
 
 private:
+	void PrintStack() const;
 	void Print(Node* node) const;
 	void Add(Node* pre, Node* cur, int val);
 	void Clear(Node* node);
-	bool Search(Node* node,int val);
+	Node* Search(Node* node,int val);
 };
 

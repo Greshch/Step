@@ -1,5 +1,6 @@
 #include "BinaryTree.h"
 #include <iostream>
+#include <stack>
 using namespace std;
 
 void BinaryTree::Add(int val)
@@ -9,12 +10,38 @@ void BinaryTree::Add(int val)
 
 void BinaryTree::Print() const
 {
-	Print(root);
+	//Print(root);
+	PrintStack();
 	cout << endl;
 }
 
 BinaryTree::~BinaryTree()
 {
+	Clear();
+}
+
+void BinaryTree::PrintStack() const
+{
+	stack<Node*> repo;
+	repo.push(root);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			int val = tmp->_val;
+			cout << val << " ";
+			if (tmp->left != nullptr)
+			{
+				repo.push(tmp->left);
+			}
+			if (tmp->right != nullptr)
+			{
+				repo.push(tmp->right);
+			}
+		}
+	}
 }
 
 void BinaryTree::Print(Node* node) const
@@ -71,21 +98,16 @@ void BinaryTree::Clear(Node* node)
 	{
 		return;
 	}
-	Print(node->left);
-	Print(node->right);
+	Clear(node->left);
+	Clear(node->right);
 	delete node;
 }
 
-bool BinaryTree::Search(Node* cur, int val)
+BinaryTree::Node* BinaryTree::Search(Node* cur, int val)
 {
-	if (cur == nullptr)
+	if (cur == nullptr || cur->_val == val)
 	{
-		return false;
-	}
-
-	if (val == cur->_val)
-	{
-		return true;
+		return cur;
 	}
 
 	if (val < cur->_val)

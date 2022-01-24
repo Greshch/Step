@@ -1,11 +1,13 @@
 #include "BinaryTree.h"
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 int main()
 {
+	srand(time(0));
 	//Test Search and Add
-	BinaryTree tree;
+	/*BinaryTree tree;
 	tree.Add(5);
 	tree.Add(3);
 	tree.Add(2);
@@ -17,7 +19,7 @@ int main()
 	int num{};
 	cout << "num: ";
 	cin >> num;
-	cout << num << " had been found: " << tree.Search(num) << endl;
+	cout << num << " had been found: " << tree.Search(num) << endl;*/
 
 	/*BinaryTree tree;
 	tree.Add(5);
@@ -28,5 +30,16 @@ int main()
 	tree.Add(6);
 	tree.Add(8);
 	tree.Print();*/
+
+	BinaryTree tree;
+	for (int i = 0; i < 20; i++)
+	{
+		int cur = rand() % 100;
+		cout << cur << " ";
+		tree.Add(cur);
+	}
+	cout << endl;
+	tree.Print();
+	//tree.PrintLefterRighter();
 	return 0;
 }

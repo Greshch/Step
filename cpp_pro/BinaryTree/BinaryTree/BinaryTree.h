@@ -17,6 +17,7 @@ public:
 	void Print() const;
 	void Clear();
 	bool Search(int val);
+	void PrintLefterRighter()const;
 	~BinaryTree();
 
 private:
@@ -26,7 +27,10 @@ private:
 	void AddStack(int val);
 	void Clear(Node* node);
 	void ClearStack();
-	Node* Search(Node* node,int val);
-	Node* SearchStack(int val);
+	Node* Search(Node* node,int val) const;
+	Node* SearchStack(int val) const;
+	Node* LefterThenNode(Node*) const;
+	Node* RighterThenNode(Node*) const;
+	bool IsList(Node* node) const;
 };
 

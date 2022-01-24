@@ -32,7 +32,7 @@ void BinaryTree::PrintStack() const
 		{
 			repo.pop();
 			int val = tmp->_val;
-			cout << val << " ";
+			cout << val << (IsList(tmp) ? "^ " : " ");
 			if (tmp->left != nullptr)
 			{
 				repo.push(tmp->left);
@@ -179,7 +179,7 @@ void BinaryTree::ClearStack()
 	}
 }
 
-BinaryTree::Node* BinaryTree::Search(Node* cur, int val)
+BinaryTree::Node* BinaryTree::Search(Node* cur, int val) const
 {
 	if (cur == nullptr || cur->_val == val)
 	{
@@ -196,7 +196,7 @@ BinaryTree::Node* BinaryTree::Search(Node* cur, int val)
 	}
 }
 
-BinaryTree::Node* BinaryTree::SearchStack(int value)
+BinaryTree::Node* BinaryTree::SearchStack(int value) const
 {
 	stack<Node*> repo;
 	repo.push(root);
@@ -227,6 +227,69 @@ BinaryTree::Node* BinaryTree::SearchStack(int value)
 	}
 }
 
+BinaryTree::Node* BinaryTree::LefterThenNode(Node* node) const
+{
+	stack<Node*> repo;
+	repo.push(node);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			if (tmp->left != nullptr)
+			{
+				repo.push(tmp->left);
+			}
+			else
+			{
+				return tmp;
+			}
+		}
+		else
+		{
+			return tmp;
+		}
+	}
+	return nullptr;
+}
+
+BinaryTree::Node* BinaryTree::RighterThenNode(Node* node) const
+{
+	stack<Node*> repo;
+	repo.push(node);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			if (tmp->right != nullptr)
+			{
+				repo.push(tmp->right);
+			}
+			else
+			{
+				return tmp;
+			}
+		}
+		else
+		{
+			return tmp;
+		}
+	}
+	return nullptr;
+}
+
+bool BinaryTree::IsList(Node* node) const
+{
+	if (node == nullptr)
+	{
+		return false;
+	}
+	return node->left == nullptr && node->right == nullptr;
+}
+
 void BinaryTree::Clear()
 {
 	//Clear(root);
@@ -237,4 +300,10 @@ bool BinaryTree::Search(int val)
 {
 	//return Search(root, val);
 	return SearchStack(val);
+}
+
+void BinaryTree::PrintLefterRighter() const
+{
+	cout << "Min -> " << LefterThenNode(root)->_val << "\tMax -> "
+		<< RighterThenNode(root)->_val << endl;
 }

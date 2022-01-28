@@ -1,4 +1,5 @@
 #include "BinaryTree.h"
+#include "MyVector.h"
 #include <iostream>
 #include <stack>
 using namespace std;
@@ -7,6 +8,77 @@ void BinaryTree::Add(int val)
 {
 	//Add(nullptr, root, val);
 	AddStack(val);
+}
+
+void BinaryTree::Remove(int val)
+{
+	Node* tmp = SearchStack(val);
+	if (tmp == nullptr)
+	{
+		return;
+	}
+
+	if (tmp == root)
+	{
+		MyVector vec = GetMyVector();
+		//vec.Print();
+		vec.Shuffle();
+		int sz = vec.GetSize();
+		Clear();
+		for (int i = 0; i < sz; i++)
+		{
+			this->Add(vec[i]);
+		}
+		return;
+	}
+
+	Node* prev = tmp->parent;
+	if (IsList(tmp))
+	{
+		if (prev->left == tmp)
+		{
+			prev->left = nullptr;
+		}
+		else
+		{
+			prev->right = nullptr;
+		}
+	}
+	else if (tmp->left != nullptr)
+	{
+		Node* rb = RighterThenNode(tmp->left);
+		tmp->_val = rb->_val;
+		prev = rb->parent;
+		
+		if (!IsList(rb))
+		{
+			Node* lb = rb->left;
+			lb->parent = prev;
+			prev->right = lb;
+		}
+		else
+		{
+			prev->right = nullptr;
+		}
+	}
+	else /*if (tmp->right != nullptr)*/
+	{
+		Node* lb = LefterThenNode(tmp->left);
+		tmp->_val = lb->_val;
+		prev = lb->parent;
+
+		if (!IsList(lb))
+		{
+			Node* rb = lb->right;
+			rb->parent = prev;
+			prev->left = rb;
+		}
+		else
+		{
+			prev->left = nullptr;
+		}
+	}
+	delete tmp;
 }
 
 void BinaryTree::Print() const
@@ -23,6 +95,10 @@ BinaryTree::~BinaryTree()
 
 void BinaryTree::PrintStack() const
 {
+	if (root == nullptr)
+	{
+		return;
+	}
 	stack<Node*> repo;
 	repo.push(root);
 	while (!repo.empty())
@@ -158,6 +234,10 @@ void BinaryTree::Clear(Node* node)
 
 void BinaryTree::ClearStack()
 {
+	if (root == nullptr)
+	{
+		return;
+	}
 	stack<Node*> repo;
 	repo.push(root);
 	while (!repo.empty())
@@ -174,9 +254,12 @@ void BinaryTree::ClearStack()
 			{
 				repo.push(tmp->right);
 			}
+			//cout << "#" << tmp->_val << endl;
 			delete tmp;
+			tmp = nullptr;
 		}
 	}
+	root = nullptr;
 }
 
 BinaryTree::Node* BinaryTree::Search(Node* cur, int val) const
@@ -306,4 +389,30 @@ void BinaryTree::PrintLefterRighter() const
 {
 	cout << "Min -> " << LefterThenNode(root)->_val << "\tMax -> "
 		<< RighterThenNode(root)->_val << endl;
+}
+
+MyVector BinaryTree::GetMyVector() const
+{
+	MyVector res;
+	stack<Node*> repo;
+	repo.push(root);
+	while (!repo.empty())
+	{
+		Node* tmp = repo.top();
+		if (tmp != nullptr)
+		{
+			repo.pop();
+			int val = tmp->_val;
+			res.PushBack(val);
+			if (tmp->left != nullptr)
+			{
+				repo.push(tmp->left);
+			}
+			if (tmp->right != nullptr)
+			{
+				repo.push(tmp->right);
+			}
+		}
+	}
+	return res;
 }

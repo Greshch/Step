@@ -32,14 +32,20 @@ int main()
 	tree.Print();*/
 
 	BinaryTree tree;
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int cur = rand() % 100;
-		cout << cur << " ";
+		//cout << cur << " ";
 		tree.Add(cur);
 	}
-	cout << endl;
+	//cout << endl;
 	tree.Print();
+	/*int num{};
+	cout << "num: ";
+	cin >> num;
+	tree.Remove(num);*/
+	tree.Clear();
+	//tree.Print();
 	//tree.PrintLefterRighter();
 	return 0;
 }

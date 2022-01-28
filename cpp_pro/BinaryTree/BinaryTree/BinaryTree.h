@@ -1,4 +1,6 @@
 #pragma once
+class MyVector;
+
 class BinaryTree
 {
 private:
@@ -14,10 +16,10 @@ private:
 
 public:
 	void Add(int val);
+	void Remove(int val);
 	void Print() const;
 	void Clear();
 	bool Search(int val);
-	void PrintLefterRighter()const;
 	~BinaryTree();
 
 private:
@@ -25,6 +27,7 @@ private:
 	void Print(Node* node) const;
 	void Add(Node* pre, Node* cur, int val);
 	void AddStack(int val);
+	//void Remove(Node* node);
 	void Clear(Node* node);
 	void ClearStack();
 	Node* Search(Node* node,int val) const;
@@ -32,5 +35,7 @@ private:
 	Node* LefterThenNode(Node*) const;
 	Node* RighterThenNode(Node*) const;
 	bool IsList(Node* node) const;
+	void PrintLefterRighter() const;
+	MyVector GetMyVector() const;
 };
 

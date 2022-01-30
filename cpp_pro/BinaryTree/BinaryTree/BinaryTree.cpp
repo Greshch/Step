@@ -43,42 +43,63 @@ void BinaryTree::Remove(int val)
 		{
 			prev->right = nullptr;
 		}
+		return;
 	}
-	else if (tmp->left != nullptr)
+
+	if (tmp->left != nullptr)
 	{
 		Node* rb = RighterThenNode(tmp->left);
 		tmp->_val = rb->_val;
-		prev = rb->parent;
-		
-		if (!IsList(rb))
+		if (tmp->left == rb)
 		{
-			Node* lb = rb->left;
-			lb->parent = prev;
-			prev->right = lb;
+			if (IsList(rb))
+			{
+				tmp->left = nullptr;
+			}
+			else
+			{
+				rb->left->parent = tmp;
+				tmp->left = rb->left;
+			}
 		}
 		else
 		{
-			prev->right = nullptr;
+			rb->parent->right = rb->left;
+			if (rb->left != nullptr)
+			{
+				rb->left->parent = rb->parent;
+			}
 		}
+		delete rb;
 	}
-	else /*if (tmp->right != nullptr)*/
+	else if (tmp->right != nullptr)
 	{
-		Node* lb = LefterThenNode(tmp->left);
+		Node* lb = LefterThenNode(tmp->right);
 		tmp->_val = lb->_val;
-		prev = lb->parent;
-
-		if (!IsList(lb))
+		if (tmp->right == lb)
 		{
-			Node* rb = lb->right;
-			rb->parent = prev;
-			prev->left = rb;
+			if (IsList(lb))
+			{
+				tmp->right = nullptr;
+			}
+			else
+			{
+				lb->right->parent = tmp;
+				tmp->right = lb->right;
+			}
 		}
 		else
 		{
-			prev->left = nullptr;
+			lb->parent->left = lb->right;
+			if (lb->right != nullptr)
+			{
+				//rb->parent->right = rb->left;
+				lb->right->parent = lb->parent;
+			}
 		}
+		delete lb;
 	}
-	delete tmp;
+	//delete tmp;
 }
 
 void BinaryTree::Print() const
@@ -331,7 +352,7 @@ BinaryTree::Node* BinaryTree::LefterThenNode(Node* node) const
 		}
 		else
 		{
-			return tmp;
+			return tmp->parent;
 		}
 	}
 	return nullptr;
@@ -358,7 +379,7 @@ BinaryTree::Node* BinaryTree::RighterThenNode(Node* node) const
 		}
 		else
 		{
-			return tmp;
+			return tmp->parent;
 		}
 	}
 	return nullptr;

@@ -3,7 +3,6 @@ struct Node
 {
 	int val = 0;
 	Node* next = nullptr;
-	Node* prev = nullptr;
 };
 
 class QueeAble abstract
@@ -17,18 +16,27 @@ public:
 	virtual bool Empty() const = 0;
 };
 
-class PrrintAble abstract
+class PrintAble abstract
 {
 public:
 	virtual void Print() const = 0;
 };
 
-class MyQuee
+class MyQuee : public PrintAble, public QueeAble
 {
 private:
 	Node* head = nullptr;
+	Node* tail = nullptr;
 	int size = 0;
 
+public:
+	virtual bool Empty() const override;
+	virtual void Push(int value) override;
+	virtual int Front() const override;
+	virtual int Back() const override;
+	virtual int Peek() const override;
+	virtual void Pop() override;
 
+	virtual void Print() const override;
 };
 

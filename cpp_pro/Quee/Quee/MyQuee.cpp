@@ -69,3 +69,28 @@ void MyQuee::Print() const
 	}
 	cout << endl;
 }
+
+MyQuee::~MyQuee()
+{
+	Clear();
+}
+
+void MyQuee::Clear()
+{
+	if (Empty())
+	{
+		tail = nullptr;
+		size = 0;
+		return;
+	}
+	Node* cur = head;
+	Node* tmp = nullptr;
+	for (int i = 0; i < size; i++)
+	{
+		tmp = cur;
+		cur = cur->next;
+		delete tmp;
+	}
+	head = tail = nullptr;
+	size = 0;
+}

@@ -26,6 +26,8 @@ int main()
 		q.Push(priority, i + 1);
 	} cout << endl;
 
+	q.Print();
+
 	while (!q.Empty())
 	{
 		int val = q.Peek();

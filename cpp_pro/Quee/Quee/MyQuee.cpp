@@ -53,6 +53,10 @@ void MyQuee::Pop()
 	delete head;
 	head = new_head;
 	--size;
+	if (size == 0)
+	{
+		head = tail = nullptr;
+	}
 }
 
 void MyQuee::Print() const
@@ -186,10 +190,18 @@ void PrQuee::Pop()
 		throw "Empty stack exception!\n";
 	}
 	PrNode* new_head = head->next;
-	head->next->prev = nullptr; // Double list!!
+	if (head->next != nullptr)
+	{
+		head->next->prev = nullptr;
+	}
+	 // Double list!!
 	delete head;
 	head = new_head;
 	--size;
+	if (size == 0)
+	{
+		head = tail = nullptr;
+	}
 }
 
 void PrQuee::Print() const

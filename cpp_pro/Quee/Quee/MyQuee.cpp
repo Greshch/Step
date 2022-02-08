@@ -126,6 +126,13 @@ void PrQuee::Push(int pri, int value)
 	/*curent->prev = tail;
 	tail->next = curent;
 	tail = curent;*/
+	if (tail->prio >= pri) // Add to tail
+	{
+		curent->prev = tail;
+		tail->next = curent;
+		tail = curent;
+		return;
+	}
 	PrNode* tmp = tail;
 	while (tmp != nullptr && tmp->prio < pri)
 	{
@@ -134,7 +141,7 @@ void PrQuee::Push(int pri, int value)
 	// new head ... if tmp == nullptr
 	if (tmp == nullptr)
 	{
-		head->prev = curent;
+		head->prev = curent;		
 		curent->next = head;
 		head = curent;
 	}

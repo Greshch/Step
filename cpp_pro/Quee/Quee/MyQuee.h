@@ -5,9 +5,12 @@ struct Node
 	Node* next = nullptr;
 };
 
-struct PrNode : public Node
+struct PrNode
 {
+	int val = 0;
 	int prio = 0;
+	PrNode* prev = nullptr;
+	PrNode* next = nullptr;
 };
 
 class QueeAble abstract
@@ -48,17 +51,25 @@ public:
 	virtual void Clear();
 };
 
-class PrQuee : public MyQuee
+class PrQuee : public PrintAble, public QueeAble
 {
+private:
+	PrNode* head = nullptr;
+	PrNode* tail = nullptr;
+	int size = 0;
 
 public:
 	virtual bool Empty() const override;
 	virtual void Push(int value) override;
+	void Push(int pri, int value);
 	virtual int Front() const override;
 	virtual int Back() const override;
 	virtual int Peek() const override;
 	virtual void Pop() override;
 
 	virtual void Print() const override;
+
+	virtual ~PrQuee();
+	virtual void Clear();
 };
 

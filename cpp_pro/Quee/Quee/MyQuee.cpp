@@ -94,3 +94,133 @@ void MyQuee::Clear()
 	head = tail = nullptr;
 	size = 0;
 }
+
+bool PrQuee::Empty() const
+{
+	return head == nullptr;;
+}
+
+void PrQuee::Push(int value)
+{
+	++size;
+	PrNode* curent = new PrNode{ value };
+	if (Empty())
+	{
+		this->head = this->tail = curent;
+		return;
+	}
+	curent->prev = tail;
+	tail->next = curent;
+	tail = curent;
+}
+
+void PrQuee::Push(int pri, int value)
+{
+	++size;
+	PrNode* curent = new PrNode{ value, pri };
+	if (Empty())
+	{
+		this->head = this->tail = curent;
+		return;
+	}
+	/*curent->prev = tail;
+	tail->next = curent;
+	tail = curent;*/
+	PrNode* tmp = tail;
+	while (tmp != nullptr && tmp->prio < pri)
+	{
+		tmp = tmp->prev;
+	}
+	// new head ... if tmp == nullptr
+	if (tmp == nullptr)
+	{
+		head->prev = curent;
+		curent->next = head;
+		head = curent;
+	}
+	else // we have to insert curent between tmp and tmp->next
+	{
+		PrNode* previos = tmp;
+		PrNode* nexter = tmp->next;
+		previos->next = curent;
+		curent->prev = previos;
+		curent->next = nexter;
+		nexter->prev = curent;
+	}
+}
+
+int PrQuee::Front() const
+{
+	if (Empty())
+	{
+		throw "Empty quee exception!\n";
+	}
+	return head->val;
+}
+
+int PrQuee::Back() const
+{
+	if (Empty())
+	{
+		throw "Empty quee exception!\n";
+	}
+	return tail->val;
+}
+
+int PrQuee::Peek() const
+{
+	return Front();
+}
+
+void PrQuee::Pop()
+{
+	if (Empty())
+	{
+		throw "Empty stack exception!\n";
+	}
+	PrNode* new_head = head->next;
+	head->next->prev = nullptr; // Double list!!
+	delete head;
+	head = new_head;
+	--size;
+}
+
+void PrQuee::Print() const
+{
+	if (Empty())
+	{
+		return;
+	}
+	PrNode* tmp = head;
+	for (int i = 0; i < size; i++)
+	{
+		cout << "{" << tmp->prio << "," << tmp->val << "} ";
+		tmp = tmp->next;
+	}
+	cout << endl;
+}
+
+PrQuee::~PrQuee()
+{
+	Clear();
+}
+
+void PrQuee::Clear()
+{
+	if (Empty())
+	{
+		tail = nullptr;
+		size = 0;
+		return;
+	}
+	PrNode* cur = head;
+	PrNode* tmp = nullptr;
+	for (int i = 0; i < size; i++)
+	{
+		tmp = cur;
+		cur = cur->next;
+		delete tmp;
+	}
+	head = tail = nullptr;
+	size = 0;
+}

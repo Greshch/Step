@@ -140,13 +140,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Chair.cpp" />
+    <ClCompile Include="ChairFabric.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Table.cpp" />
+    <ClCompile Include="TableFabric.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chair.h" />
+    <ClInclude Include="ChairFabric.h" />
     <ClInclude Include="Furniture.h" />
+    <ClInclude Include="FurnitureFabric.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="TableFabric.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

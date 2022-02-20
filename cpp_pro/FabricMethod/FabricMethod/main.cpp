@@ -8,6 +8,10 @@ void ClearRoom(vector<Furniture*>& obj);
 
 int main()
 {
+	FurnitureFabric* fabric = /*new TableFabric*/ new ChairFabric;
+	auto room = fabric->FillInCorners();
+	ShowRoom(room);
+	delete fabric;
 	return 0;
 }
 
@@ -24,7 +28,7 @@ void ShowRoom(vector<Furniture*>& obj)
 		{
 			cout << "\t";
 		}
-		if (i && 0 == i % 4)
+		if ((i + 1) % 4 == 0)
 		{
 			cout << "\n";
 		}
